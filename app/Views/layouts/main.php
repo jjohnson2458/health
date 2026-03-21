@@ -40,6 +40,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/calculator/calories"><?= e(__('nav.calorie_calc')) ?></a></li>
                             <li><a class="dropdown-item" href="/calculator/macros"><?= e(__('nav.macro_calc')) ?></a></li>
+                            <li><a class="dropdown-item" href="/calculator/food"><?= e(__('nav.food_tracker')) ?></a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

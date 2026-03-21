@@ -26,6 +26,7 @@ return [
         'calculators' => 'Calculators',
         'calorie_calc' => 'Calorie Calculator',
         'macro_calc' => 'Macro Calculator',
+        'food_tracker' => 'Food Tracker',
         'planner' => 'Weight Loss Planner',
         'guide' => 'User Guide',
         'profile' => 'Profile',

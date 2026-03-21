@@ -26,6 +26,7 @@ return [
         'calculators' => 'Calculadoras',
         'calorie_calc' => 'Calculadora de calorías',
         'macro_calc' => 'Calculadora de macros',
+        'food_tracker' => 'Rastreador de alimentos',
         'planner' => 'Planificador de pérdida de peso',
         'guide' => 'Guía del usuario',
         'profile' => 'Perfil',

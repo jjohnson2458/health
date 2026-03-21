@@ -5,6 +5,7 @@ use App\Controllers\DashboardController;
 use App\Controllers\EntryController;
 use App\Controllers\AnalyticsController;
 use App\Controllers\CalculatorController;
+use App\Controllers\FoodTrackerController;
 use App\Controllers\PlannerController;
 use App\Controllers\GuideController;
 use App\Controllers\LanguageController;
@@ -47,6 +48,8 @@ $router->get('/calculator/calories', CalculatorController::class, 'calories', $a
 $router->post('/calculator/calories', CalculatorController::class, 'calculateCalories', $auth);
 $router->get('/calculator/macros', CalculatorController::class, 'macros', $auth);
 $router->post('/calculator/macros', CalculatorController::class, 'calculateMacros', $auth);
+
+$router->get('/calculator/food', FoodTrackerController::class, 'index', $auth);
 
 $router->get('/planner', PlannerController::class, 'index', $auth);
 $router->post('/planner', PlannerController::class, 'create', $auth);
