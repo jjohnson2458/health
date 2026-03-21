@@ -1,0 +1,9 @@
+/vendor/
+/node_modules/
+.env
+*.log
+.phpunit.result.cache
+/test-results/
+/playwright-report/
+.DS_Store
+Thumbs.db

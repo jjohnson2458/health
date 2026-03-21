@@ -1,0 +1,55 @@
+/* Claude Health - Custom Styles */
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Auth pages */
+.auth-card {
+    max-width: 440px;
+    margin: 0 auto;
+}
+
+/* Dashboard stat cards */
+.stat-card {
+    border-left: 4px solid;
+    transition: transform 0.15s;
+}
+.stat-card:hover {
+    transform: translateY(-2px);
+}
+.stat-card.weight { border-color: #0d6efd; }
+.stat-card.calories { border-color: #ffc107; }
+.stat-card.streak { border-color: #198754; }
+.stat-card.heart { border-color: #dc3545; }
+
+/* Chart containers */
+.chart-container {
+    position: relative;
+    height: 300px;
+}
+
+/* Entry form */
+.entry-form .form-label {
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* HIPAA badge */
+.hipaa-badge {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 576px) {
+    html { font-size: 13px; }
+    .chart-container { height: 220px; }
+    .navbar-brand { font-size: 1rem; }
+}
