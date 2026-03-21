@@ -124,21 +124,45 @@ class AuthController extends Controller
 
         LoginAttempt::record($data['email'], $ip, true);
 
-        // Generate 2FA code
-        $code = User::generateTwoFaCode($user['id']);
-        $decrypted = User::decryptUser($user);
+        // Check if 2FA is enabled (requires mail script)
+        $twoFaEnabled = !empty($_ENV['TWOFA_ENABLED']) && $_ENV['TWOFA_ENABLED'] === 'true';
 
-        // Send 2FA code via email
-        $this->send2FACode($decrypted['email'], $decrypted['first_name'], $code);
+        if ($twoFaEnabled) {
+            // Generate 2FA code
+            $code = User::generateTwoFaCode($user['id']);
+            $decrypted = User::decryptUser($user);
 
-        // Store user_id in session but mark as NOT fully verified yet
-        Session::set('user_id', $user['id']);
-        Session::set('auth_verified', false);
-        Session::set('lang', $user['language']);
+            // Send 2FA code via email
+            $this->send2FACode($decrypted['email'], $decrypted['first_name'], $code);
 
-        AuditLog::log($user['id'], 'login_step1', 'auth');
+            // Store user_id in session but mark as NOT fully verified yet
+            Session::set('user_id', $user['id']);
+            Session::set('auth_verified', false);
+            Session::set('lang', $user['language']);
 
-        $this->redirect('/verify-code');
+            AuditLog::log($user['id'], 'login_step1', 'auth');
+
+            $this->redirect('/verify-code');
+        } else {
+            // Skip 2FA - go straight to dashboard
+            Session::set('user_id', $user['id']);
+            Session::set('auth_verified', true);
+            Session::set('lang', $user['language']);
+            Session::regenerate();
+
+            $decrypted = User::decryptUser($user);
+            Session::set('user_data', [
+                'id' => $user['id'],
+                'first_name' => $decrypted['first_name'],
+                'last_name' => $decrypted['last_name'],
+                'email' => $decrypted['email'],
+                'language' => $user['language'],
+            ]);
+
+            AuditLog::log($user['id'], 'login_complete', 'auth');
+            Session::flash('success', __('auth.login_success'));
+            $this->redirect('/dashboard');
+        }
     }
 
     public function showVerifyCode(): void
