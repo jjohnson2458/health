@@ -68,6 +68,7 @@ class FoodTrackerController extends Controller
             ['name' => 'Pear (medium)', 'calories' => 101, 'carbs' => 27, 'category' => 'Yellow'],
             ['name' => 'Mango (cup)', 'calories' => 99, 'carbs' => 25, 'category' => 'Yellow'],
             ['name' => 'Pineapple (cup)', 'calories' => 82, 'carbs' => 22, 'category' => 'Yellow'],
+            ['name' => 'Kiwi (medium)', 'calories' => 42, 'carbs' => 10, 'category' => 'Yellow'],
             ['name' => 'Whole Wheat Bread (slice)', 'calories' => 81, 'carbs' => 14, 'category' => 'Yellow'],
             ['name' => 'Whole Wheat Tortilla', 'calories' => 130, 'carbs' => 22, 'category' => 'Yellow'],
             ['name' => 'Whole Wheat Pasta (cup)', 'calories' => 174, 'carbs' => 37, 'category' => 'Yellow'],

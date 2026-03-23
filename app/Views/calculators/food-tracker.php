@@ -39,6 +39,42 @@
                         <button class="btn btn-dark" id="addFoodBtn">+ Add</button>
                     </div>
                 </div>
+                <div class="text-end mt-2">
+                    <a href="#" class="small text-decoration-none" id="toggleCustomFood">
+                        <i class="bi bi-plus-circle"></i> Add custom food item
+                    </a>
+                </div>
+                <div id="customFoodSection" class="mt-3 pt-3 border-top" style="display:none;">
+                    <div class="row g-2 align-items-end">
+                        <div class="col">
+                            <label class="form-label small mb-1">Food Name</label>
+                            <input type="text" class="form-control" id="customFoodName" placeholder="e.g. Trail Mix (1 oz)">
+                        </div>
+                        <div class="col-auto" style="width:100px;">
+                            <label class="form-label small mb-1">Calories</label>
+                            <input type="number" class="form-control text-center" id="customFoodCal" min="0" placeholder="0">
+                        </div>
+                        <div class="col-auto" style="width:100px;">
+                            <label class="form-label small mb-1">Carbs (g)</label>
+                            <input type="number" class="form-control text-center" id="customFoodCarbs" min="0" step="0.1" placeholder="0">
+                        </div>
+                        <div class="col-auto" style="width:120px;">
+                            <label class="form-label small mb-1">Category</label>
+                            <select class="form-select" id="customFoodCategory">
+                                <option value="Green">Green</option>
+                                <option value="Yellow">Yellow</option>
+                                <option value="Red">Red</option>
+                            </select>
+                        </div>
+                        <div class="col-auto" style="width:80px;">
+                            <label class="form-label small mb-1">Qty</label>
+                            <input type="number" class="form-control text-center" id="customFoodQty" value="1" min="1" max="20">
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-dark" id="addCustomFoodBtn">+ Add</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -189,5 +225,43 @@ document.getElementById("addFoodBtn").addEventListener("click", function() {
     updateTotals();
     select.value = "";
     qtyInput.value = 1;
+});
+
+document.getElementById("toggleCustomFood").addEventListener("click", function(e) {
+    e.preventDefault();
+    const section = document.getElementById("customFoodSection");
+    const isHidden = section.style.display === "none";
+    section.style.display = isHidden ? "" : "none";
+    this.innerHTML = isHidden
+        ? "<i class=\"bi bi-dash-circle\"></i> Hide custom food form"
+        : "<i class=\"bi bi-plus-circle\"></i> Add custom food item";
+});
+
+document.getElementById("addCustomFoodBtn").addEventListener("click", function() {
+    const name = document.getElementById("customFoodName").value.trim();
+    const cal = parseInt(document.getElementById("customFoodCal").value) || 0;
+    const carbs = parseFloat(document.getElementById("customFoodCarbs").value) || 0;
+    const category = document.getElementById("customFoodCategory").value;
+    const qty = parseInt(document.getElementById("customFoodQty").value) || 1;
+
+    if (!name) {
+        document.getElementById("customFoodName").focus();
+        return;
+    }
+
+    loggedItems.push({
+        name: name,
+        calories: cal,
+        carbs: carbs,
+        category: category,
+        qty: qty
+    });
+
+    renderTable();
+    updateTotals();
+    document.getElementById("customFoodName").value = "";
+    document.getElementById("customFoodCal").value = "";
+    document.getElementById("customFoodCarbs").value = "";
+    document.getElementById("customFoodQty").value = 1;
 });
 </script>'; ?>
