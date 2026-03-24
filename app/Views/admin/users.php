@@ -1,6 +1,9 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0"><i class="bi bi-people"></i> Manage Users</h4>
-    <a href="/admin" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left"></i> Admin</a>
+    <div class="d-flex gap-2">
+        <a href="/admin/users/create" class="btn btn-success btn-sm"><i class="bi bi-person-plus"></i> Create User</a>
+        <a href="/admin" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left"></i> Admin</a>
+    </div>
 </div>
 
 <div class="card">

@@ -66,6 +66,59 @@ class AdminController extends Controller
         ]);
     }
 
+    public function createUser(): void
+    {
+        View::render('admin/user-create', [
+            'title' => 'Create User',
+        ]);
+    }
+
+    public function storeUser(): void
+    {
+        $firstName = trim($this->input('first_name', ''));
+        $lastName = trim($this->input('last_name', ''));
+        $email = trim($this->input('email', ''));
+        $password = $this->input('password', '');
+        $role = $this->input('role', 'user');
+        $language = $this->input('language', 'en');
+        $emailVerified = (int) $this->input('email_verified', 0);
+
+        $errors = [];
+        if ($firstName === '') $errors[] = 'First name is required.';
+        if ($lastName === '') $errors[] = 'Last name is required.';
+        if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'A valid email is required.';
+        if (strlen($password) < 8) $errors[] = 'Password must be at least 8 characters.';
+        if (!in_array($role, ['user', 'admin'])) $role = 'user';
+        if (!in_array($language, ['en', 'es'])) $language = 'en';
+
+        if (User::findByEmail($email)) {
+            $errors[] = 'A user with that email already exists.';
+        }
+
+        if (!empty($errors)) {
+            Session::flash('errors', $errors);
+            $this->redirect('/admin/users/create');
+            return;
+        }
+
+        $userId = User::createUser($firstName, $lastName, $email, $password);
+        User::update($userId, [
+            'role' => $role,
+            'language' => $language,
+            'email_verified' => $emailVerified,
+        ]);
+
+        AuditLog::log(
+            (int) Session::get('user_id'),
+            'admin_create_user',
+            'users',
+            "Admin created user #{$userId}: {$email} (role: {$role})"
+        );
+
+        Session::flash('success', 'User created successfully.');
+        $this->redirect('/admin/users');
+    }
+
     public function editUser(string $id): void
     {
         $user = User::find((int) $id);

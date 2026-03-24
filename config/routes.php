@@ -100,6 +100,8 @@ $router->post('/appointments/{id}/cancel', AppointmentController::class, 'cancel
 // Admin routes
 $router->get('/admin', AdminController::class, 'dashboard', $admin);
 $router->get('/admin/users', AdminController::class, 'users', $admin);
+$router->get('/admin/users/create', AdminController::class, 'createUser', $admin);
+$router->post('/admin/users/create', AdminController::class, 'storeUser', $admin);
 $router->get('/admin/users/{id}', AdminController::class, 'editUser', $admin);
 $router->post('/admin/users/{id}', AdminController::class, 'updateUser', $admin);
 $router->post('/admin/users/{id}/delete', AdminController::class, 'deleteUser', $admin);
