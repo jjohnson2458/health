@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Health - Feature Guide</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        html { font-size: 14px; }
+        body { background: #f8f9fa; }
+        .feature-card { transition: transform 0.2s; border-left: 4px solid; }
+        .feature-card:hover { transform: translateY(-2px); }
+        .feature-card.core { border-left-color: #0d6efd; }
+        .feature-card.health { border-left-color: #198754; }
+        .feature-card.tools { border-left-color: #6f42c1; }
+        .feature-card.security { border-left-color: #dc3545; }
+        .feature-card.admin { border-left-color: #fd7e14; }
+        .feature-card.export { border-left-color: #0dcaf0; }
+        .toc a { text-decoration: none; color: #495057; }
+        .toc a:hover { color: #0d6efd; }
+        .badge-route { font-family: monospace; font-size: 0.75rem; }
+        @media print {
+            .no-print { display: none; }
+            .feature-card { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary no-print">
+        <div class="container">
+            <span class="navbar-brand fw-bold"><i class="bi bi-heart-pulse"></i> Claude Health - Feature Guide</span>
+            <span class="text-light small">Last updated: <span id="lastUpdated"></span></span>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <div class="row">
+            <!-- Table of Contents Sidebar -->
+            <div class="col-lg-3 no-print">
+                <div class="card sticky-top" style="top: 1rem;">
+                    <div class="card-header fw-bold"><i class="bi bi-list-ul"></i> Contents</div>
+                    <div class="card-body toc small">
+                        <p class="mb-1"><strong>Core Features</strong></p>
+                        <ul class="list-unstyled ms-2 mb-2">
+                            <li><a href="#dashboard">Dashboard</a></li>
+                            <li><a href="#entries">Health Entries</a></li>
+                            <li><a href="#analytics">Analytics</a></li>
+                        </ul>
+                        <p class="mb-1"><strong>Health Tools</strong></p>
+                        <ul class="list-unstyled ms-2 mb-2">
+                            <li><a href="#calorie-calc">Calorie Calculator</a></li>
+                            <li><a href="#macro-calc">Macro Calculator</a></li>
+                            <li><a href="#food-tracker">Food Tracker</a></li>
+                            <li><a href="#planner">Weight Loss Planner</a></li>
+                        </ul>
+                        <p class="mb-1"><strong>Medical</strong></p>
+                        <ul class="list-unstyled ms-2 mb-2">
+                            <li><a href="#medications">Medications</a></li>
+                            <li><a href="#appointments">Appointments</a></li>
+                        </ul>
+                        <p class="mb-1"><strong>Data & Export</strong></p>
+                        <ul class="list-unstyled ms-2 mb-2">
+                            <li><a href="#export-csv">CSV Export</a></li>
+                            <li><a href="#export-print">Print / PDF</a></li>
+                        </ul>
+                        <p class="mb-1"><strong>Security & Compliance</strong></p>
+                        <ul class="list-unstyled ms-2 mb-2">
+                            <li><a href="#auth">Authentication</a></li>
+                            <li><a href="#encryption">Encryption</a></li>
+                            <li><a href="#hipaa">HIPAA Compliance</a></li>
+                            <li><a href="#audit">Audit Logging</a></li>
+                        </ul>
+                        <p class="mb-1"><strong>Administration</strong></p>
+                        <ul class="list-unstyled ms-2 mb-2">
+                            <li><a href="#admin-dashboard">Admin Dashboard</a></li>
+                            <li><a href="#user-mgmt">User Management</a></li>
+                            <li><a href="#error-log">Error Log</a></li>
+                        </ul>
+                        <p class="mb-1"><strong>Internationalization</strong></p>
+                        <ul class="list-unstyled ms-2 mb-2">
+                            <li><a href="#i18n">English / Spanish</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Content -->
+            <div class="col-lg-9">
+                <div class="mb-4">
+                    <h2>Claude Health Feature Guide</h2>
+                    <p class="text-muted">Comprehensive reference of all application features, routes, and capabilities.</p>
+                    <p class="small text-muted">
+                        <strong>Production:</strong> https://health.visionquest2020.net |
+                        <strong>Local:</strong> http://health.local |
+                        <strong>Author:</strong> J.J. Johnson
+                    </p>
+                </div>
+
+                <!-- ==================== CORE FEATURES ==================== -->
+                <h4 class="border-bottom pb-2 mb-3"><i class="bi bi-grid text-primary"></i> Core Features</h4>
+
+                <div id="dashboard" class="card feature-card core shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title"><i class="bi bi-speedometer2"></i> Dashboard</h5>
+                            <span class="badge bg-primary badge-route">GET /dashboard</span>
+                        </div>
+                        <p>The main landing page after login. Displays:</p>
+                        <ul class="mb-2">
+                            <li><strong>Today's entry status</strong> - quick link to add or edit today's data</li>
+                            <li><strong>Current streak</strong> - consecutive days of tracking</li>
+                            <li><strong>Latest weight</strong> - most recent recorded weight</li>
+                            <li><strong>Active medications</strong> - count with link to manage</li>
+                            <li><strong>Upcoming appointments</strong> - next scheduled visits</li>
+                            <li><strong>7-day trend charts</strong> - weight, calories, exercise at a glance</li>
+                        </ul>
+                        <span class="badge bg-secondary">Auth required</span>
+                    </div>
+                </div>
+
+                <div id="entries" class="card feature-card core shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title"><i class="bi bi-journal-plus"></i> Health Entries</h5>
+                            <div>
+                                <span class="badge bg-primary badge-route">GET /entry</span>
+                                <span class="badge bg-primary badge-route">GET /entries</span>
+                            </div>
+                        </div>
+                        <p>Daily health data logging with one entry per day. Fields tracked:</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="mb-0">
+                                    <li><strong>Weight</strong> (lbs) - encrypted at rest</li>
+                                    <li><strong>Calories</strong> - daily intake</li>
+                                    <li><strong>Protein</strong> (g), <strong>Carbs</strong> (g), <strong>Fat</strong> (g)</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="mb-0">
+                                    <li><strong>Heart Rate</strong> (bpm)</li>
+                                    <li><strong>Blood Sugar</strong> (mg/dL)</li>
+                                    <li><strong>Exercise</strong> - type + minutes</li>
+                                    <li><strong>Notes</strong> - encrypted at rest</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="mt-2 mb-0 small text-muted">Unique constraint: one entry per user per date. Edit and delete supported.</p>
+                        <span class="badge bg-secondary">Auth required</span>
+                        <span class="badge bg-success">Encrypted</span>
+                    </div>
+                </div>
+
+                <div id="analytics" class="card feature-card core shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title"><i class="bi bi-graph-up"></i> Analytics</h5>
+                            <div>
+                                <span class="badge bg-primary badge-route">GET /analytics</span>
+                                <span class="badge bg-primary badge-route">GET /analytics/data</span>
+                            </div>
+                        </div>
+                        <p>Interactive Chart.js visualizations with date range filtering:</p>
+                        <ul class="mb-2">
+                            <li><strong>Weight Over Time</strong> - line chart tracking progress</li>
+                            <li><strong>Calories Over Time</strong> - daily intake patterns</li>
+                            <li><strong>Heart Rate & Blood Sugar</strong> - vitals monitoring</li>
+                            <li><strong>Exercise Minutes</strong> - activity trends</li>
+                            <li><strong>Day-of-Week Averages</strong> - identify patterns (Mon-Sun)</li>
+                        </ul>
+                        <p class="mb-0 small text-muted">Date ranges: Week, Month, 3 Months, 6 Months, Year. Data fetched via AJAX.</p>
+                        <span class="badge bg-secondary">Auth required</span>
+                    </div>
+                </div>
+
+                <!-- ==================== HEALTH TOOLS ==================== -->
+                <h4 class="border-bottom pb-2 mb-3 mt-4"><i class="bi bi-tools text-purple"></i> Health Tools</h4>
+
+                <div id="calorie-calc" class="card feature-card tools shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title"><i class="bi bi-calculator"></i> Calorie Deficit Calculator</h5>
+                            <span class="badge bg-primary badge-route">GET /calculator/calories</span>
+                        </div>
+                        <p>Uses the <strong>Mifflin-St Jeor equation</strong> to calculate:</p>
+                        <ul class="mb-2">
+                            <li><strong>BMR</strong> (Basal Metabolic Rate) - calories burned at rest</li>
+                            <li><strong>TDEE</strong> (Total Daily Energy Expenditure) - adjusted for activity level</li>
+                            <li><strong>Recommended daily calories</strong> based on goal (lose, maintain, gain)</li>
+                        </ul>
+                        <p class="mb-0 small text-muted">Inputs: age, gender, height, weight, activity level (sedentary to very active).</p>
+                    </div>
+                </div>
+
+                <div id="macro-calc" class="card feature-card tools shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title"><i class="bi bi-pie-chart"></i> Macro Calculator</h5>
+                            <span class="badge bg-primary badge-route">GET /calculator/macros</span>
+                        </div>
+                        <p>Calculates ideal macronutrient split based on daily calorie target and goal:</p>
+                        <ul class="mb-2">
+                            <li><strong>Protein</strong> - grams and calories (4 cal/g)</li>
+                            <li><strong>Carbohydrates</strong> - grams and calories (4 cal/g)</li>
+                            <li><strong>Fat</strong> - grams and calories (9 cal/g)</li>
+                        </ul>
+                        <p class="mb-0 small text-muted">Goal-based splits: weight loss (high protein), maintenance (balanced), muscle gain.</p>
+                    </div>
+                </div>
+
+                <div id="food-tracker" class="card feature-card tools shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title"><i class="bi bi-egg-fried"></i> Food Tracker</h5>
+                            <span class="badge bg-primary badge-route">GET /calculator/food</span>
+                        </div>
+                        <p>Noom-style food categorization system with 120+ foods:</p>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <span class="badge bg-success">Green</span> Low-calorie density
+                                <p class="small text-muted mb-0">Fruits, vegetables, whole grains</p>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="badge bg-warning text-dark">Yellow</span> Moderate density
+                                <p class="small text-muted mb-0">Lean meats, dairy, beans</p>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="badge bg-danger">Red</span> High-calorie density
+                                <p class="small text-muted mb-0">Oils, sweets, processed foods</p>
+                            </div>
+                        </div>
+                        <p class="mt-2 mb-0 small text-muted">Includes custom food entry form for items not in the database.</p>
+                    </div>
+                </div>
+
+                <div id="planner" class="card feature-card tools shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title"><i class="bi bi-calendar-check"></i> Weight Loss Planner</h5>
+                            <div>
+                                <span class="badge bg-primary badge-route">GET /planner</span>
+                                <span class="badge bg-primary badge-route">GET /planner/data</span>
+                            </div>
+                        </div>
+                        <p>Goal-setting tool with milestone projections:</p>
+                        <ul class="mb-2">
+                            <li>Set <strong>current weight</strong>, <strong>goal weight</strong>, and <strong>weekly target</strong> (0.5-2 lbs/week)</li>
+                            <li>Calculates <strong>weeks to goal</strong> with projected milestone dates</li>
+                            <li>Chart comparing <strong>projected vs actual</strong> weight over time</li>
+                            <li>Personalized recommendations (lifestyle, supplements, medication considerations)</li>
+                        </ul>
+                        <div class="alert alert-warning small mb-0 py-1">
+                            <i class="bi bi-exclamation-triangle"></i> Always consult your healthcare provider before starting any weight loss program.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== MEDICAL ==================== -->
+                <h4 class="border-bottom pb-2 mb-3 mt-4"><i class="bi bi-hospital text-success"></i> Medical Management</h4>
+
+                <div id="medications" class="card feature-card health shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title"><i class="bi bi-capsule"></i> Medications</h5>
+                            <span class="badge bg-primary badge-route">GET /medications</span>
+                        </div>
+                        <p>Full prescription tracking with HIPAA-compliant audit trail:</p>
+                        <ul class="mb-2">
+                            <li><strong>Add/Edit medications</strong> - name, dosage, frequency, prescriber, prescribed date</li>
+                            <li><strong>Status management</strong> - active, inactive, discontinued (with reason)</li>
+                            <li><strong>Reactivation</strong> - restore discontinued medications</li>
+                            <li><strong>History log</strong> - complete audit trail of all changes per medication</li>
+                            <li><strong>Source tracking</strong> - manual entry, provider push, or CSV import</li>
+                            <li><strong>Share view</strong> - printable medication list for providers</li>
+                        </ul>
+                        <span class="badge bg-success">Encrypted</span>
+                        <span class="badge bg-info">HIPAA Audited</span>
+                    </div>
+                </div>
+
+                <div id="appointments" class="card feature-card health shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title"><i class="bi bi-calendar-event"></i> Appointments</h5>
+                            <div>
+                                <span class="badge bg-primary badge-route">GET /appointments</span>
+                                <span class="badge bg-primary badge-route">GET /appointments/calendar</span>
+                            </div>
+                        </div>
+                        <p>Medical appointment scheduling and tracking:</p>
+                        <ul class="mb-2">
+                            <li><strong>Types:</strong> checkup, lab, specialist, dental, vision, therapy, other</li>
+                            <li><strong>Calendar view</strong> - monthly calendar with appointment markers</li>
+                            <li><strong>Status flow:</strong> scheduled &rarr; completed / cancelled</li>
+                            <li><strong>Reminder system</strong> - email and SMS flags for next-day appointments</li>
+                            <li><strong>Provider & location</strong> - encrypted at rest</li>
+                        </ul>
+                        <span class="badge bg-success">Encrypted</span>
+                    </div>
+                </div>
+
+                <!-- ==================== DATA & EXPORT ==================== -->
+                <h4 class="border-bottom pb-2 mb-3 mt-4"><i class="bi bi-download text-info"></i> Data & Export</h4>
+
+                <div id="export-csv" class="card feature-card export shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title"><i class="bi bi-filetype-csv"></i> CSV Export</h5>
+                            <span class="badge bg-primary badge-route">GET /export/csv</span>
+                        </div>
+                        <p>Download health entries as a CSV file. Supports optional date range filtering via <code>start_date</code> and <code>end_date</code> query parameters.</p>
+                        <p class="mb-0 small text-muted">Columns: Date, Weight, Calories, Protein, Carbs, Fat, Heart Rate, Blood Sugar, Exercise Min, Exercise Type, Notes.</p>
+                        <span class="badge bg-info">Audit Logged</span>
+                    </div>
+                </div>
+
+                <div id="export-print" class="card feature-card export shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title"><i class="bi bi-printer"></i> Print / PDF Export</h5>
+                            <span class="badge bg-primary badge-route">GET /export/print</span>
+                        </div>
+                        <p>Print-friendly HTML page for browser Print-to-PDF. Includes:</p>
+                        <ul class="mb-2">
+                            <li>Patient name and date range</li>
+                            <li>Summary cards (entry count, active meds, upcoming appointments)</li>
+                            <li>Full health entries table</li>
+                            <li>Medications table with status badges</li>
+                            <li>Upcoming appointments table</li>
+                            <li>HIPAA confidentiality footer</li>
+                        </ul>
+                        <span class="badge bg-info">Audit Logged</span>
+                    </div>
+                </div>
+
+                <!-- ==================== SECURITY ==================== -->
+                <h4 class="border-bottom pb-2 mb-3 mt-4"><i class="bi bi-shield-lock text-danger"></i> Security & Compliance</h4>
+
+                <div id="auth" class="card feature-card security shadow-sm mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-key"></i> Authentication</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="mb-0">
+                                    <li><strong>Registration</strong> - email verification required</li>
+                                    <li><strong>Login</strong> - email + password</li>
+                                    <li><strong>Two-Factor Auth</strong> - 6-digit email code (10-min expiry)</li>
+                                    <li><strong>Forgot Password</strong> - token-based email reset</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="mb-0">
+                                    <li><strong>Rate Limiting</strong> - 5 attempts / 15 min per email+IP</li>
+                                    <li><strong>Session Timeout</strong> - 30 min inactivity</li>
+                                    <li><strong>CSRF Protection</strong> - all POST/PUT/DELETE forms</li>
+                                    <li><strong>Bcrypt</strong> - cost factor 12</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="encryption" class="card feature-card security shadow-sm mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-lock"></i> Encryption at Rest</h5>
+                        <p>AES-256-CBC encryption for all personally identifiable information:</p>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p class="fw-bold mb-1">User PII</p>
+                                <ul class="small mb-0">
+                                    <li>First name, Last name</li>
+                                    <li>Email address</li>
+                                    <li>Phone number</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="fw-bold mb-1">Health Data</p>
+                                <ul class="small mb-0">
+                                    <li>Weight</li>
+                                    <li>Notes</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="fw-bold mb-1">Medical Data</p>
+                                <ul class="small mb-0">
+                                    <li>Medication names, dosage</li>
+                                    <li>Prescriber info</li>
+                                    <li>Provider names, locations</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="mt-2 mb-0 small text-muted">Email lookups use SHA-256 hash (email_hash) for fast queries without decryption.</p>
+                    </div>
+                </div>
+
+                <div id="hipaa" class="card feature-card security shadow-sm mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-shield-check"></i> HIPAA Compliance</h5>
+                        <ul class="mb-0">
+                            <li><strong>Encryption at rest</strong> - AES-256-CBC for all PII and PHI</li>
+                            <li><strong>Encryption in transit</strong> - SSL/TLS required in production</li>
+                            <li><strong>Access controls</strong> - role-based (user/admin), session authentication</li>
+                            <li><strong>Audit trail</strong> - all data access logged with user ID, action, IP, timestamp</li>
+                            <li><strong>Minimum necessary</strong> - users can only access their own data</li>
+                            <li><strong>Security headers</strong> - CSP, X-Frame-Options, X-Content-Type-Options, X-XSS-Protection</li>
+                            <li><strong>Error handling</strong> - sensitive data never exposed in error messages (production mode)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="audit" class="card feature-card security shadow-sm mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-clipboard-check"></i> Audit Logging</h5>
+                        <p>Every significant action is recorded in the <code>audit_log</code> table:</p>
+                        <ul class="mb-0">
+                            <li><strong>Actions tracked:</strong> login, view, edit, delete, export, admin operations</li>
+                            <li><strong>Fields logged:</strong> user_id, action, resource, details, ip_address, timestamp</li>
+                            <li><strong>Retention:</strong> 1 year (nightly cleanup purges older records)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ==================== ADMINISTRATION ==================== -->
+                <h4 class="border-bottom pb-2 mb-3 mt-4"><i class="bi bi-gear text-warning"></i> Administration</h4>
+
+                <div id="admin-dashboard" class="card feature-card admin shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title"><i class="bi bi-speedometer"></i> Admin Dashboard</h5>
+                            <span class="badge bg-primary badge-route">GET /admin</span>
+                        </div>
+                        <p>System overview with key metrics:</p>
+                        <ul class="mb-0">
+                            <li>Total users, health entries, medications, appointments</li>
+                            <li>Errors in last 24 hours (with link to error log)</li>
+                        </ul>
+                        <span class="badge bg-danger">Admin only</span>
+                    </div>
+                </div>
+
+                <div id="user-mgmt" class="card feature-card admin shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title"><i class="bi bi-people"></i> User Management (CRUD)</h5>
+                            <span class="badge bg-primary badge-route">GET /admin/users</span>
+                        </div>
+                        <p>Full user lifecycle management:</p>
+                        <ul class="mb-2">
+                            <li><strong>Create</strong> - add new users with name, email, password, role, language</li>
+                            <li><strong>Read</strong> - paginated user list with decrypted PII, role badges, verification status</li>
+                            <li><strong>Update</strong> - change role (user/admin), email verification, language, password reset</li>
+                            <li><strong>Delete</strong> - cascade delete all user data (with confirmation)</li>
+                            <li><strong>Export</strong> - download individual patient data as CSV</li>
+                        </ul>
+                        <span class="badge bg-danger">Admin only</span>
+                        <span class="badge bg-info">Audit Logged</span>
+                    </div>
+                </div>
+
+                <div id="error-log" class="card feature-card admin shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title"><i class="bi bi-exclamation-octagon"></i> Error Log</h5>
+                            <span class="badge bg-primary badge-route">GET /admin/errors</span>
+                        </div>
+                        <p>Paginated error log viewer showing application errors and exceptions. Captured via global error/exception handlers in <code>public/index.php</code>.</p>
+                        <p class="mb-0 small text-muted">Fields: level, message, file, line, stack trace, user ID, IP, URL, timestamp.</p>
+                        <span class="badge bg-danger">Admin only</span>
+                    </div>
+                </div>
+
+                <!-- ==================== I18N ==================== -->
+                <h4 class="border-bottom pb-2 mb-3 mt-4"><i class="bi bi-translate"></i> Internationalization</h4>
+
+                <div id="i18n" class="card feature-card core shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title"><i class="bi bi-globe"></i> English / Spanish</h5>
+                            <span class="badge bg-primary badge-route">GET /lang/{lang}</span>
+                        </div>
+                        <p>Full bilingual support with 160+ translation keys:</p>
+                        <ul class="mb-0">
+                            <li>Language files: <code>app/Lang/en.php</code>, <code>app/Lang/es.php</code></li>
+                            <li>User preference saved to database</li>
+                            <li>Switchable via navbar dropdown</li>
+                            <li>Helper function: <code>__('key')</code> with nested key support</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ==================== LEGAL ==================== -->
+                <h4 class="border-bottom pb-2 mb-3 mt-4"><i class="bi bi-file-earmark-text"></i> Legal Pages</h4>
+
+                <div class="card feature-card core shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6><i class="bi bi-file-text"></i> Terms of Service</h6>
+                                <span class="badge bg-primary badge-route">GET /terms</span>
+                                <p class="small text-muted mb-0">Public, no auth required</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6><i class="bi bi-eye-slash"></i> Privacy Policy</h6>
+                                <span class="badge bg-primary badge-route">GET /privacy</span>
+                                <p class="small text-muted mb-0">Public, no auth required</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6><i class="bi bi-shield-check"></i> HIPAA Notice</h6>
+                                <span class="badge bg-primary badge-route">GET /hipaa</span>
+                                <p class="small text-muted mb-0">Public, no auth required</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="text-center text-muted small mt-5 pt-3 border-top">
+                    <p>&copy; 2026 VisionQuest Services LLC. Claude Health Feature Guide.</p>
+                    <p>Author: J.J. Johnson &lt;visionquest716@gmail.com&gt;</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString('en-US', {
+            year: 'numeric', month: 'long', day: 'numeric'
+        });
+    </script>
+</body>
+</html>

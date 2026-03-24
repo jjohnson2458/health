@@ -23,7 +23,7 @@ On failure: email
 ### playwright
 Run Playwright end-to-end browser tests.
 Command: `npx playwright test`
-Config: `playwright.config.ts`
+Config: `playwright.config.js`
 Requires: Node.js, npm, Chromium.
 On failure: email
 
@@ -53,6 +53,12 @@ On failure: email
 ### user_guide
 - Verify in-app user guide at /guide is accessible and renders
 - Check all translation keys used in guide exist in both en.php and es.php
+
+### feature_guide
+- Verify docs/FEATURES.html exists and is not empty
+- Cross-check that all routes in config/routes.php are documented in FEATURES.html
+- If new routes are found that aren't documented, flag them in the nightly report
+- Regenerate the "Last updated" note if changes were made
 
 ### cost_estimate
 - Run cost estimator if available

@@ -1,6 +1,9 @@
 <div class="row justify-content-center">
     <div class="col-md-10">
-        <h4 class="mb-4"><i class="bi bi-book"></i> <?= e(__('nav.guide')) ?></h4>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="mb-0"><i class="bi bi-book"></i> <?= e(__('nav.guide')) ?></h4>
+            <a href="/guide/features" class="btn btn-outline-primary btn-sm" target="_blank"><i class="bi bi-list-check"></i> Full Feature Guide</a>
+        </div>
 
         <div class="accordion" id="guideAccordion">
             <!-- Getting Started -->

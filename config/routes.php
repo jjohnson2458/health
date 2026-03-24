@@ -77,6 +77,7 @@ $router->post('/planner', PlannerController::class, 'create', $auth);
 $router->get('/planner/data', PlannerController::class, 'data', $auth);
 
 $router->get('/guide', GuideController::class, 'index', $auth);
+$router->get('/guide/features', GuideController::class, 'features', $auth);
 
 // Medications
 $router->get('/medications', MedicationController::class, 'index', $auth);
