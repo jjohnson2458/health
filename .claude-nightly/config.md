@@ -1,10 +1,71 @@
-# Claude Health - Nightly Configuration
+# Nightly Config — claude_health
 
-## Enabled
-yes
+## Enabled Tasks
+- unit_tests: true
+- playwright: true
+- cleanup: true
+- security_audit: true
+- docs: true
+- user_guide: true
+- feature_guide: true
+- business_plan: false
+- backup: false
+- auto_push: false
+- cost_estimate: true
 
-## Tasks
-- Run PHPUnit tests and report failures
-- Check for security vulnerabilities in dependencies (composer audit)
-- Verify database schema is in sync with schema.sql
-- Run Playwright E2E tests if available
+## Task Definitions
+
+### unit_tests
+Run the full PHPUnit test suite and report pass/fail results.
+Command: `php vendor/bin/phpunit --testdox`
+On failure: email
+
+### playwright
+Run Playwright end-to-end browser tests.
+Command: `npx playwright test`
+Config: `playwright.config.ts`
+Requires: Node.js, npm, Chromium.
+On failure: email
+
+### cleanup
+- Purge expired password reset tokens (password_reset_expires < NOW())
+- Purge expired 2FA codes (twofa_expires < NOW())
+- Purge expired email verification tokens (email_token_expires < NOW())
+- Purge expired provider invite tokens (connection_status = 'pending' AND created_at < 7 days ago)
+- Purge old error_log entries (older than 90 days)
+- Purge old audit_log entries (older than 1 year)
+- Purge old login_attempts entries (older than 30 days)
+- Clear storage/logs/*.log files older than 30 days
+- Clear storage/cache/*
+
+### security_audit
+- Run `composer audit` for known vulnerabilities
+- Verify .env and secrets.txt are NOT in git tracking
+- Verify ENCRYPTION_KEY is set and 64 chars
+- Check that SESSION_SECURE=true in production
+- Verify database schema matches schema.sql
+- Check for any unencrypted PII in database (spot check)
+
+### docs
+- Rebuild PHPDoc API documentation if phpdoc.dist.xml exists
+- Command: `php vendor/bin/phpdoc run`
+
+### user_guide
+- Verify in-app user guide at /guide is accessible and renders
+- Check all translation keys used in guide exist in both en.php and es.php
+
+### cost_estimate
+- Run cost estimator if available
+- Command: `php C:\xampp\htdocs\claude_estimator\php-cost-estimator\estimate.php`
+- Compare to previous estimate and flag significant growth (>10%)
+
+## Reporting
+- Generate a summary of all task results
+- Email the report via claude_messenger with project flag `claude_health`
+- Always send report, even on partial failure
+
+## Notes
+- All tasks run sequentially; failures in one task do not block subsequent tasks
+- Reports are always sent, even on partial failure
+- CGM sync health check: verify cgm_connections with status 'active' have synced within last 24 hours (once Phase 10 is built)
+- Appointment reminder check: verify scripts/appointment-reminders.php cron is running (once Phase 8 is built)

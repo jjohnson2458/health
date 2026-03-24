@@ -149,6 +149,13 @@ class HealthEntry extends Model
         return $averages;
     }
 
+    public static function paginateForUser(int $userId, int $page = 1, int $perPage = 15): array
+    {
+        $result = static::paginate($page, $perPage, 'user_id = ?', [$userId], 'entry_date DESC');
+        $result['data'] = array_map([self::class, 'decryptEntry'], $result['data']);
+        return $result;
+    }
+
     private static function encryptFields(array $data): array
     {
         foreach (self::$encryptedFields as $field) {

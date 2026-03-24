@@ -1,9 +1,15 @@
 /vendor/
 /node_modules/
 .env
+.env.testing
+.env.production
+project.txt
+secrets.txt
 *.log
 .phpunit.result.cache
 /test-results/
 /playwright-report/
+/storage/logs/
+/storage/cache/
 .DS_Store
 Thumbs.db

@@ -30,15 +30,22 @@
                         </div>
                     </div>
 
+                    <div class="d-flex justify-content-end mb-3">
+                        <a href="/forgot-password" class="small text-muted"><?= e(__('auth.forgot_password')) ?></a>
+                    </div>
+
                     <button type="submit" class="btn btn-primary w-100 mb-3">
                         <i class="bi bi-box-arrow-in-right"></i> <?= e(__('auth.login')) ?>
                     </button>
                 </form>
 
+                <?php $regEnabled = !isset($_ENV['NEW_USER_REGISTRATION']) || $_ENV['NEW_USER_REGISTRATION'] !== 'false'; ?>
+                <?php if ($regEnabled): ?>
                 <p class="text-center small mb-0">
                     <?= e(__('auth.no_account')) ?>
                     <a href="/register"><?= e(__('auth.register')) ?></a>
                 </p>
+                <?php endif; ?>
             </div>
         </div>
 

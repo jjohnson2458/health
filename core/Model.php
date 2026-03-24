@@ -73,4 +73,38 @@ abstract class Model
         $stmt->execute($params);
         return (int) $stmt->fetch()['cnt'];
     }
+
+    public static function paginate(
+        int $page = 1,
+        int $perPage = 15,
+        ?string $where = null,
+        array $params = [],
+        string $orderBy = 'id DESC'
+    ): array {
+        $page = max(1, $page);
+        $offset = ($page - 1) * $perPage;
+
+        $total = static::count('*', $where, $params);
+        $lastPage = max(1, (int) ceil($total / $perPage));
+
+        $db = Database::getInstance();
+        $sql = 'SELECT * FROM `' . static::$table . '`';
+        if ($where) {
+            $sql .= ' WHERE ' . $where;
+        }
+        $sql .= ' ORDER BY ' . $orderBy . ' LIMIT ? OFFSET ?';
+
+        $queryParams = array_merge($params, [$perPage, $offset]);
+        $stmt = $db->prepare($sql);
+        $stmt->execute($queryParams);
+        $data = $stmt->fetchAll();
+
+        return [
+            'data' => $data,
+            'total' => $total,
+            'page' => $page,
+            'perPage' => $perPage,
+            'lastPage' => $lastPage,
+        ];
+    }
 }

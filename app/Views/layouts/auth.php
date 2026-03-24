@@ -63,6 +63,14 @@
         </div>
     </main>
 
+    <footer class="text-center small py-3">
+        <a href="/terms" class="text-muted text-decoration-none"><?= e(__('legal.terms')) ?></a>
+        <span class="text-muted mx-1">|</span>
+        <a href="/privacy" class="text-muted text-decoration-none"><?= e(__('legal.privacy')) ?></a>
+        <span class="text-muted mx-1">|</span>
+        <a href="/hipaa" class="text-muted text-decoration-none"><?= e(__('legal.hipaa')) ?></a>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,6 +1,10 @@
 <?php
 
 use App\Controllers\AuthController;
+use App\Controllers\ExportController;
+use App\Controllers\LegalController;
+use App\Controllers\MedicationController;
+use App\Controllers\AppointmentController;
 use App\Controllers\DashboardController;
 use App\Controllers\EntryController;
 use App\Controllers\AnalyticsController;
@@ -27,13 +31,25 @@ $router->get('/verify-email/{token}', AuthController::class, 'verifyEmail');
 $router->get('/verify-code', AuthController::class, 'showVerifyCode');
 $router->post('/verify-code', AuthController::class, 'verifyCode', $csrf);
 $router->get('/resend-code', AuthController::class, 'resendCode');
+$router->get('/forgot-password', AuthController::class, 'showForgotPassword', [GuestMiddleware::class]);
+$router->post('/forgot-password', AuthController::class, 'forgotPassword', $guest);
+$router->get('/reset-password/{token}', AuthController::class, 'showResetPassword');
+$router->post('/reset-password', AuthController::class, 'resetPassword', $csrf);
 $router->get('/logout', AuthController::class, 'logout');
+
+// Legal pages (public, no auth required)
+$router->get('/terms', LegalController::class, 'termsOfService');
+$router->get('/privacy', LegalController::class, 'privacyPolicy');
+$router->get('/hipaa', LegalController::class, 'hipaaNotice');
 
 // Language switch
 $router->get('/lang/{lang}', LanguageController::class, 'switch');
 
 // Authenticated routes
 $router->get('/dashboard', DashboardController::class, 'index', $auth);
+
+$router->get('/entries', EntryController::class, 'index', $auth);
+$router->get('/export/csv', ExportController::class, 'csv', $auth);
 
 $router->get('/entry', EntryController::class, 'create', $auth);
 $router->post('/entry', EntryController::class, 'store', $auth);
@@ -56,3 +72,24 @@ $router->post('/planner', PlannerController::class, 'create', $auth);
 $router->get('/planner/data', PlannerController::class, 'data', $auth);
 
 $router->get('/guide', GuideController::class, 'index', $auth);
+
+// Medications
+$router->get('/medications', MedicationController::class, 'index', $auth);
+$router->get('/medications/create', MedicationController::class, 'create', $auth);
+$router->post('/medications', MedicationController::class, 'store', $auth);
+$router->get('/medications/share', MedicationController::class, 'share', $auth);
+$router->get('/medications/{id}', MedicationController::class, 'edit', $auth);
+$router->post('/medications/{id}', MedicationController::class, 'update', $auth);
+$router->post('/medications/{id}/discontinue', MedicationController::class, 'discontinue', $auth);
+$router->post('/medications/{id}/reactivate', MedicationController::class, 'reactivate', $auth);
+$router->get('/medications/{id}/history', MedicationController::class, 'history', $auth);
+
+// Appointments
+$router->get('/appointments', AppointmentController::class, 'index', $auth);
+$router->get('/appointments/calendar', AppointmentController::class, 'calendar', $auth);
+$router->get('/appointments/create', AppointmentController::class, 'create', $auth);
+$router->post('/appointments', AppointmentController::class, 'store', $auth);
+$router->get('/appointments/{id}', AppointmentController::class, 'edit', $auth);
+$router->post('/appointments/{id}', AppointmentController::class, 'update', $auth);
+$router->post('/appointments/{id}/complete', AppointmentController::class, 'complete', $auth);
+$router->post('/appointments/{id}/cancel', AppointmentController::class, 'cancel', $auth);

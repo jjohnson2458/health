@@ -1,8 +1,16 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0"><?= e(__('dashboard.title')) ?></h4>
-    <a href="/entry" class="btn btn-primary btn-sm">
-        <i class="bi bi-plus-circle"></i> <?= e(__('dashboard.add_entry')) ?>
-    </a>
+    <div>
+        <a href="/entries" class="btn btn-outline-secondary btn-sm me-1">
+            <i class="bi bi-journal-text"></i> <?= e(__('entry.history_title')) ?>
+        </a>
+        <a href="/export/csv" class="btn btn-outline-success btn-sm me-1">
+            <i class="bi bi-download"></i> <?= e(__('export.csv')) ?>
+        </a>
+        <a href="/entry" class="btn btn-primary btn-sm">
+            <i class="bi bi-plus-circle"></i> <?= e(__('dashboard.add_entry')) ?>
+        </a>
+    </div>
 </div>
 
 <!-- Stat Cards -->

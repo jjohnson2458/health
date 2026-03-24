@@ -28,6 +28,8 @@ return [
         'macro_calc' => 'Calculadora de macros',
         'food_tracker' => 'Rastreador de alimentos',
         'planner' => 'Planificador de pérdida de peso',
+        'medications' => 'Medicamentos',
+        'appointments' => 'Citas',
         'guide' => 'Guía del usuario',
         'profile' => 'Perfil',
     ],
@@ -58,6 +60,15 @@ return [
         'account_locked' => 'Demasiados intentos fallidos. Intente más tarde.',
         'invalid_code' => 'Código de verificación inválido o expirado.',
         'email_not_verified' => 'Verifique su correo antes de iniciar sesión.',
+        'forgot_password_desc' => 'Ingrese su correo y le enviaremos un enlace para restablecer su contraseña.',
+        'send_reset_link' => 'Enviar enlace',
+        'back_to_login' => 'Volver al inicio de sesión',
+        'reset_password' => 'Restablecer contraseña',
+        'new_password' => 'Nueva contraseña',
+        'reset_link_sent' => 'Si existe una cuenta con ese correo, se ha enviado un enlace para restablecer la contraseña.',
+        'invalid_reset_token' => 'Enlace inválido o expirado. Solicite uno nuevo.',
+        'password_reset_success' => '¡Contraseña restablecida! Ya puede iniciar sesión con su nueva contraseña.',
+        'registration_disabled' => 'El registro de nuevos usuarios está deshabilitado.',
     ],
 
     // Health Entries
@@ -77,6 +88,8 @@ return [
         'saved' => '¡Entrada guardada exitosamente!',
         'updated' => '¡Entrada actualizada exitosamente!',
         'deleted' => 'Entrada eliminada.',
+        'history_title' => 'Historial de entradas',
+        'no_entries' => 'No se encontraron entradas.',
     ],
 
     // Dashboard
@@ -147,6 +160,93 @@ return [
         'create_plan' => 'Crear plan',
         'projected' => 'Progreso proyectado',
         'actual' => 'Progreso real',
+    ],
+
+    // Medications
+    'medications' => [
+        'title' => 'Mis medicamentos',
+        'add' => 'Agregar medicamento',
+        'edit' => 'Editar medicamento',
+        'name' => 'Nombre del medicamento',
+        'dosage' => 'Dosis',
+        'frequency' => 'Frecuencia',
+        'select_frequency' => 'Seleccionar frecuencia',
+        'prescriber' => 'Prescriptor',
+        'prescriber_placeholder' => 'Dr. nombre o clínica',
+        'npi' => 'Número NPI',
+        'prescribed_date' => 'Fecha de prescripción',
+        'notes' => 'Notas',
+        'notes_placeholder' => 'Instrucciones especiales, efectos secundarios, etc.',
+        'active' => 'Activos',
+        'discontinued_tab' => 'Descontinuados',
+        'no_active' => 'No hay medicamentos activos.',
+        'no_discontinued' => 'No hay medicamentos descontinuados.',
+        'discontinue' => 'Descontinuar',
+        'confirm_discontinue' => '¿Descontinuar este medicamento?',
+        'discontinued' => 'Medicamento descontinuado.',
+        'discontinued_on' => 'Descontinuado el',
+        'reactivate' => 'Reactivar',
+        'reactivated' => 'Medicamento reactivado.',
+        'saved' => 'Medicamento agregado exitosamente.',
+        'updated' => 'Medicamento actualizado.',
+        'history' => 'Historial',
+        'no_history' => 'No hay historial registrado.',
+        'share' => 'Lista compartible',
+        'print' => 'Imprimir',
+        'medication_list' => 'Lista de medicamentos',
+        'generated_on' => 'Generado el',
+        'active_count' => ':count medicamento(s) activo(s)',
+    ],
+
+    // Appointments
+    'appointments' => [
+        'title' => 'Mis citas',
+        'add' => 'Agregar cita',
+        'edit' => 'Editar cita',
+        'calendar' => 'Calendario',
+        'list_view' => 'Vista de lista',
+        'date' => 'Fecha',
+        'time' => 'Hora',
+        'provider' => 'Proveedor / Doctor',
+        'provider_placeholder' => 'Dr. nombre o clínica',
+        'type' => 'Tipo',
+        'location' => 'Ubicación',
+        'location_placeholder' => 'Dirección o nombre de clínica',
+        'notes' => 'Notas',
+        'notes_placeholder' => 'Qué llevar, ayuno requerido, etc.',
+        'upcoming' => 'Próximas',
+        'past' => 'Pasadas',
+        'no_upcoming' => 'No hay citas próximas.',
+        'no_past' => 'No hay citas pasadas.',
+        'saved' => 'Cita agregada exitosamente.',
+        'updated' => 'Cita actualizada.',
+        'mark_complete' => 'Marcar completada',
+        'completed' => 'Cita marcada como completada.',
+        'cancel_appt' => 'Cancelar cita',
+        'confirm_cancel' => '¿Cancelar esta cita?',
+        'cancelled' => 'Cita cancelada.',
+    ],
+
+    // Export
+    'export' => [
+        'csv' => 'Exportar CSV',
+        'title' => 'Exportar datos',
+    ],
+
+    // Pagination
+    'pagination' => [
+        'showing' => 'Mostrando',
+        'of' => 'de',
+    ],
+
+    // Legal
+    'legal' => [
+        'terms' => 'Términos de servicio',
+        'terms_title' => 'Términos de servicio',
+        'privacy' => 'Política de privacidad',
+        'privacy_title' => 'Política de privacidad',
+        'hipaa' => 'Aviso HIPAA',
+        'hipaa_title' => 'Aviso de privacidad HIPAA',
     ],
 
     // Validation

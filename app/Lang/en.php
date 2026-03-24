@@ -18,20 +18,6 @@ return [
     'logout' => 'Logout',
     'language' => 'Language',
 
-    // Navigation
-    'nav' => [
-        'dashboard' => 'Dashboard',
-        'entries' => 'Daily Entry',
-        'analytics' => 'Analytics',
-        'calculators' => 'Calculators',
-        'calorie_calc' => 'Calorie Calculator',
-        'macro_calc' => 'Macro Calculator',
-        'food_tracker' => 'Food Tracker',
-        'planner' => 'Weight Loss Planner',
-        'guide' => 'User Guide',
-        'profile' => 'Profile',
-    ],
-
     // Auth
     'auth' => [
         'login' => 'Login',
@@ -58,6 +44,15 @@ return [
         'account_locked' => 'Too many failed attempts. Please try again later.',
         'invalid_code' => 'Invalid or expired verification code.',
         'email_not_verified' => 'Please verify your email before logging in.',
+        'forgot_password_desc' => 'Enter your email and we will send you a link to reset your password.',
+        'send_reset_link' => 'Send Reset Link',
+        'back_to_login' => 'Back to Login',
+        'reset_password' => 'Reset Password',
+        'new_password' => 'New Password',
+        'reset_link_sent' => 'If an account with that email exists, a password reset link has been sent.',
+        'invalid_reset_token' => 'Invalid or expired reset link. Please request a new one.',
+        'password_reset_success' => 'Password reset successfully! You can now log in with your new password.',
+        'registration_disabled' => 'New user registration is currently disabled.',
     ],
 
     // Health Entries
@@ -77,6 +72,8 @@ return [
         'saved' => 'Entry saved successfully!',
         'updated' => 'Entry updated successfully!',
         'deleted' => 'Entry deleted.',
+        'history_title' => 'Entry History',
+        'no_entries' => 'No entries found.',
     ],
 
     // Dashboard
@@ -147,6 +144,109 @@ return [
         'create_plan' => 'Create Plan',
         'projected' => 'Projected Progress',
         'actual' => 'Actual Progress',
+    ],
+
+    // Navigation (additions)
+    'nav' => [
+        'dashboard' => 'Dashboard',
+        'entries' => 'Daily Entry',
+        'analytics' => 'Analytics',
+        'calculators' => 'Calculators',
+        'calorie_calc' => 'Calorie Calculator',
+        'macro_calc' => 'Macro Calculator',
+        'food_tracker' => 'Food Tracker',
+        'planner' => 'Weight Loss Planner',
+        'medications' => 'Medications',
+        'appointments' => 'Appointments',
+        'guide' => 'User Guide',
+        'profile' => 'Profile',
+    ],
+
+    // Medications
+    'medications' => [
+        'title' => 'My Medications',
+        'add' => 'Add Medication',
+        'edit' => 'Edit Medication',
+        'name' => 'Medication Name',
+        'dosage' => 'Dosage',
+        'frequency' => 'Frequency',
+        'select_frequency' => 'Select frequency',
+        'prescriber' => 'Prescriber',
+        'prescriber_placeholder' => 'Dr. name or clinic',
+        'npi' => 'NPI Number',
+        'prescribed_date' => 'Prescribed Date',
+        'notes' => 'Notes',
+        'notes_placeholder' => 'Special instructions, side effects, etc.',
+        'active' => 'Active',
+        'discontinued_tab' => 'Discontinued',
+        'no_active' => 'No active medications.',
+        'no_discontinued' => 'No discontinued medications.',
+        'discontinue' => 'Discontinue',
+        'confirm_discontinue' => 'Discontinue this medication?',
+        'discontinued' => 'Medication discontinued.',
+        'discontinued_on' => 'Discontinued on',
+        'reactivate' => 'Reactivate',
+        'reactivated' => 'Medication reactivated.',
+        'saved' => 'Medication added successfully.',
+        'updated' => 'Medication updated.',
+        'history' => 'History',
+        'no_history' => 'No history recorded.',
+        'share' => 'Shareable List',
+        'print' => 'Print',
+        'medication_list' => 'Medication List',
+        'generated_on' => 'Generated on',
+        'active_count' => ':count active medication(s)',
+    ],
+
+    // Appointments
+    'appointments' => [
+        'title' => 'My Appointments',
+        'add' => 'Add Appointment',
+        'edit' => 'Edit Appointment',
+        'calendar' => 'Calendar',
+        'list_view' => 'List View',
+        'date' => 'Date',
+        'time' => 'Time',
+        'provider' => 'Provider / Doctor',
+        'provider_placeholder' => 'Dr. name or clinic',
+        'type' => 'Type',
+        'location' => 'Location',
+        'location_placeholder' => 'Address or clinic name',
+        'notes' => 'Notes',
+        'notes_placeholder' => 'What to bring, fasting required, etc.',
+        'upcoming' => 'Upcoming',
+        'past' => 'Past',
+        'no_upcoming' => 'No upcoming appointments.',
+        'no_past' => 'No past appointments.',
+        'saved' => 'Appointment added successfully.',
+        'updated' => 'Appointment updated.',
+        'mark_complete' => 'Mark Complete',
+        'completed' => 'Appointment marked as completed.',
+        'cancel_appt' => 'Cancel Appointment',
+        'confirm_cancel' => 'Cancel this appointment?',
+        'cancelled' => 'Appointment cancelled.',
+    ],
+
+    // Export
+    'export' => [
+        'csv' => 'Export CSV',
+        'title' => 'Export Data',
+    ],
+
+    // Pagination
+    'pagination' => [
+        'showing' => 'Showing',
+        'of' => 'of',
+    ],
+
+    // Legal
+    'legal' => [
+        'terms' => 'Terms of Service',
+        'terms_title' => 'Terms of Service',
+        'privacy' => 'Privacy Policy',
+        'privacy_title' => 'Privacy Policy',
+        'hipaa' => 'HIPAA Notice',
+        'hipaa_title' => 'HIPAA Privacy Notice',
     ],
 
     // Validation

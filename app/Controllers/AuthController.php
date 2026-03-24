@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Core\Controller;
+use Core\Mailer;
 use Core\Session;
 use Core\View;
 use App\Models\User;
@@ -18,11 +19,22 @@ class AuthController extends Controller
 
     public function showRegister(): void
     {
+        if (isset($_ENV['NEW_USER_REGISTRATION']) && $_ENV['NEW_USER_REGISTRATION'] === 'false') {
+            Session::flash('errors', [__('auth.registration_disabled')]);
+            $this->redirect('/login');
+            return;
+        }
         View::render('auth/register', ['title' => __('auth.register')], 'layouts/auth');
     }
 
     public function register(): void
     {
+        if (isset($_ENV['NEW_USER_REGISTRATION']) && $_ENV['NEW_USER_REGISTRATION'] === 'false') {
+            Session::flash('errors', [__('auth.registration_disabled')]);
+            $this->redirect('/login');
+            return;
+        }
+
         $data = $this->validate([
             'first_name' => 'required|max:100',
             'last_name' => 'required|max:100',
@@ -235,6 +247,87 @@ class AuthController extends Controller
         $this->redirect('/login');
     }
 
+    public function showForgotPassword(): void
+    {
+        View::render('auth/forgot-password', ['title' => __('auth.forgot_password')], 'layouts/auth');
+    }
+
+    public function forgotPassword(): void
+    {
+        $data = $this->validate([
+            'email' => 'required|email',
+        ]);
+
+        $token = User::generatePasswordResetToken($data['email']);
+
+        if ($token) {
+            $user = User::findByEmail($data['email']);
+            $decrypted = User::decryptUser($user);
+            $this->sendPasswordResetEmail($decrypted['email'], $decrypted['first_name'], $token);
+            AuditLog::log($user['id'], 'password_reset_requested', 'auth');
+        }
+
+        // Always show success to prevent email enumeration
+        Session::flash('success', __('auth.reset_link_sent'));
+        $this->redirect('/forgot-password');
+    }
+
+    public function showResetPassword(string $token): void
+    {
+        $user = User::findByResetToken($token);
+        if (!$user) {
+            Session::flash('errors', [__('auth.invalid_reset_token')]);
+            $this->redirect('/forgot-password');
+            return;
+        }
+
+        View::render('auth/reset-password', [
+            'title' => __('auth.reset_password'),
+            'token' => $token,
+        ], 'layouts/auth');
+    }
+
+    public function resetPassword(): void
+    {
+        $data = $this->validate([
+            'token' => 'required',
+            'password' => 'required|min:8',
+            'password_confirm' => 'required',
+        ]);
+
+        if ($data['password'] !== $data['password_confirm']) {
+            Session::flash('errors', ['Passwords do not match.']);
+            $this->redirect('/reset-password/' . $data['token']);
+            return;
+        }
+
+        $user = User::findByResetToken($data['token']);
+        if (!$user) {
+            Session::flash('errors', [__('auth.invalid_reset_token')]);
+            $this->redirect('/forgot-password');
+            return;
+        }
+
+        User::resetPassword($user['id'], $data['password']);
+        AuditLog::log($user['id'], 'password_reset_complete', 'auth');
+
+        Session::flash('success', __('auth.password_reset_success'));
+        $this->redirect('/login');
+    }
+
+    private function sendPasswordResetEmail(string $email, string $firstName, string $token): void
+    {
+        $url = rtrim($_ENV['APP_URL'], '/') . '/reset-password/' . $token;
+        $subject = __('app_name') . ' - ' . __('auth.reset_password');
+        $body = "<h2>" . e($firstName) . ", " . e(__('auth.reset_password')) . "</h2>"
+            . "<p>Click the button below to reset your password. This link expires in 1 hour.</p>"
+            . "<p><a href=\"{$url}\" style=\"display:inline-block;padding:10px 24px;background:#0d6efd;color:#fff;text-decoration:none;border-radius:4px;\">Reset Password</a></p>"
+            . "<p style=\"color:#666;\">If you did not request this, please ignore this email.</p>"
+            . "<p style=\"color:#666;font-size:12px;\">" . e(__('hipaa_notice')) . "</p>";
+
+        Mailer::send($email, $subject, $body, 'claude_health');
+    }
+
     private function sendVerificationEmail(string $email, string $firstName, string $token): void
     {
         $url = rtrim($_ENV['APP_URL'], '/') . '/verify-email/' . $token;
@@ -244,7 +337,7 @@ class AuthController extends Controller
             . "<p><a href=\"{$url}\" style=\"display:inline-block;padding:10px 24px;background:#0d6efd;color:#fff;text-decoration:none;border-radius:4px;\">Verify Email</a></p>"
             . "<p style=\"color:#666;font-size:12px;\">" . e(__('hipaa_notice')) . "</p>";
 
-        $this->sendEmail($email, $subject, $body);
+        Mailer::send($email, $subject, $body, 'claude_health');
     }
 
     private function send2FACode(string $email, string $firstName, string $code): void
@@ -255,29 +348,6 @@ class AuthController extends Controller
             . "<p style=\"color:#666;\">This code expires in 10 minutes.</p>"
             . "<p style=\"color:#666;font-size:12px;\">" . e(__('hipaa_notice')) . "</p>";
 
-        $this->sendEmail($email, $subject, $body);
-    }
-
-    private function sendEmail(string $to, string $subject, string $body): void
-    {
-        $script = $_ENV['MAIL_NOTIFY_SCRIPT'] ?? '';
-        if (!$script || !file_exists($script)) {
-            error_log("Mail script not found: {$script}");
-            return;
-        }
-
-        $cmd = sprintf(
-            'php %s --subject %s --body %s --to %s --project %s',
-            escapeshellarg($script),
-            escapeshellarg($subject),
-            escapeshellarg($body),
-            escapeshellarg($to),
-            escapeshellarg('claude_health')
-        );
-
-        exec($cmd . ' 2>&1', $output, $returnCode);
-        if ($returnCode !== 0) {
-            error_log("Email send failed: " . implode("\n", $output));
-        }
+        Mailer::send($email, $subject, $body, 'claude_health');
     }
 }

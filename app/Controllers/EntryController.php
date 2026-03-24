@@ -10,6 +10,20 @@ use App\Models\AuditLog;
 
 class EntryController extends Controller
 {
+    public function index(): void
+    {
+        $userId = (int) Session::get('user_id');
+        $page = max(1, (int) ($this->input('page', 1)));
+
+        $result = HealthEntry::paginateForUser($userId, $page, 15);
+
+        View::render('entries/index', [
+            'title' => __('entry.history_title'),
+            'entries' => $result['data'],
+            'pagination' => $result,
+        ]);
+    }
+
     public function create(): void
     {
         $userId = (int) Session::get('user_id');

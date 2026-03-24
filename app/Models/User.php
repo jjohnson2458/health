@@ -66,4 +66,41 @@ class User extends Model
         ]);
         return true;
     }
+
+    public static function generatePasswordResetToken(string $email): ?string
+    {
+        $user = static::findByEmail($email);
+        if (!$user) {
+            return null;
+        }
+
+        $token = bin2hex(random_bytes(32));
+        static::update($user['id'], [
+            'password_reset_token' => $token,
+            'password_reset_expires' => date('Y-m-d H:i:s', strtotime('+1 hour')),
+        ]);
+
+        return $token;
+    }
+
+    public static function findByResetToken(string $token): ?array
+    {
+        $user = static::whereFirst('password_reset_token', $token);
+        if (!$user) {
+            return null;
+        }
+        if (strtotime($user['password_reset_expires']) < time()) {
+            return null;
+        }
+        return $user;
+    }
+
+    public static function resetPassword(int $userId, string $newPassword): void
+    {
+        static::update($userId, [
+            'password_hash' => password_hash($newPassword, PASSWORD_BCRYPT, ['cost' => 12]),
+            'password_reset_token' => null,
+            'password_reset_expires' => null,
+        ]);
+    }
 }

@@ -47,6 +47,12 @@
                         <a class="nav-link" href="/planner"><i class="bi bi-calendar-check"></i> <?= e(__('nav.planner')) ?></a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/medications"><i class="bi bi-capsule"></i> <?= e(__('nav.medications')) ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/appointments"><i class="bi bi-calendar-event"></i> <?= e(__('nav.appointments')) ?></a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/guide"><i class="bi bi-book"></i> <?= e(__('nav.guide')) ?></a>
                     </li>
                 </ul>
@@ -111,6 +117,13 @@
     <footer class="bg-dark text-light py-3 mt-auto">
         <div class="container text-center small">
             <p class="mb-1">&copy; <?= date('Y') ?> <?= e(__('app_name')) ?>. <?= e(__('hipaa_notice')) ?></p>
+            <p class="mb-1">
+                <a href="/terms" class="text-muted text-decoration-none"><?= e(__('legal.terms')) ?></a>
+                <span class="text-muted mx-1">|</span>
+                <a href="/privacy" class="text-muted text-decoration-none"><?= e(__('legal.privacy')) ?></a>
+                <span class="text-muted mx-1">|</span>
+                <a href="/hipaa" class="text-muted text-decoration-none"><?= e(__('legal.hipaa')) ?></a>
+            </p>
             <p class="mb-0 text-muted"><?= e(__('tagline')) ?></p>
         </div>
     </footer>
