@@ -53,6 +53,8 @@ $router->get('/dashboard', DashboardController::class, 'index', $auth);
 
 $router->get('/entries', EntryController::class, 'index', $auth);
 $router->get('/export/csv', ExportController::class, 'csv', $auth);
+$router->get('/export/print', ExportController::class, 'printView', $auth);
+$router->get('/export/pdf', ExportController::class, 'pdf', $auth);
 
 $router->get('/entry', EntryController::class, 'create', $auth);
 $router->post('/entry', EntryController::class, 'store', $auth);

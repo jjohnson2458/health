@@ -5,6 +5,9 @@ namespace App\Controllers;
 use Core\Controller;
 use Core\Session;
 use App\Models\HealthEntry;
+use App\Models\Medication;
+use App\Models\Appointment;
+use App\Models\User;
 use App\Models\AuditLog;
 
 class ExportController extends Controller
@@ -48,6 +51,47 @@ class ExportController extends Controller
         }
 
         fclose($output);
+        exit;
+    }
+
+    public function printView(): void
+    {
+        $userId = (int) Session::get('user_id');
+        $startDate = $this->input('start_date');
+        $endDate = $this->input('end_date');
+
+        // Get user info
+        $user = User::find($userId);
+        $user = User::decryptUser($user);
+        $userName = trim(($user['first_name'] ?? '') . ' ' . ($user['last_name'] ?? ''));
+
+        // Get health entries
+        $entries = HealthEntry::getEntriesForUser($userId, $startDate, $endDate);
+
+        // Get medications (all, including discontinued)
+        $medications = Medication::getAllForUser($userId);
+
+        // Get upcoming appointments
+        $appointments = Appointment::getUpcomingForUser($userId);
+
+        AuditLog::log($userId, 'export', 'health_entries', 'Print export: ' . count($entries) . ' entries');
+
+        require __DIR__ . '/../Views/export/print.php';
+        exit;
+    }
+
+    public function pdf(): void
+    {
+        // Redirect to the printable view - user can use browser's Print > Save as PDF
+        $params = [];
+        if ($startDate = $this->input('start_date')) {
+            $params['start_date'] = $startDate;
+        }
+        if ($endDate = $this->input('end_date')) {
+            $params['end_date'] = $endDate;
+        }
+        $query = $params ? '?' . http_build_query($params) : '';
+        header('Location: /export/print' . $query);
         exit;
     }
 }
