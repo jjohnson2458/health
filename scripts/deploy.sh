@@ -23,7 +23,7 @@ php scripts/migrate.php
 # Set permissions
 echo ">> Setting permissions..."
 chmod -R 755 public/
-chmod 700 .env
+chmod 640 .env
 chmod 700 secrets.txt 2>/dev/null || true
 
 DEPLOY_END=$(date '+%Y-%m-%d %H:%M:%S')
