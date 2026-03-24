@@ -4,6 +4,7 @@ use App\Controllers\AuthController;
 use App\Controllers\ExportController;
 use App\Controllers\LegalController;
 use App\Controllers\MedicationController;
+use App\Controllers\AdminController;
 use App\Controllers\AppointmentController;
 use App\Controllers\DashboardController;
 use App\Controllers\EntryController;
@@ -13,11 +14,13 @@ use App\Controllers\FoodTrackerController;
 use App\Controllers\PlannerController;
 use App\Controllers\GuideController;
 use App\Controllers\LanguageController;
+use App\Middleware\AdminMiddleware;
 use App\Middleware\AuthMiddleware;
 use App\Middleware\GuestMiddleware;
 use App\Middleware\CsrfMiddleware;
 
 $auth = [AuthMiddleware::class, CsrfMiddleware::class];
+$admin = [AdminMiddleware::class, CsrfMiddleware::class];
 $guest = [GuestMiddleware::class, CsrfMiddleware::class];
 $csrf = [CsrfMiddleware::class];
 
@@ -93,3 +96,12 @@ $router->get('/appointments/{id}', AppointmentController::class, 'edit', $auth);
 $router->post('/appointments/{id}', AppointmentController::class, 'update', $auth);
 $router->post('/appointments/{id}/complete', AppointmentController::class, 'complete', $auth);
 $router->post('/appointments/{id}/cancel', AppointmentController::class, 'cancel', $auth);
+
+// Admin routes
+$router->get('/admin', AdminController::class, 'dashboard', $admin);
+$router->get('/admin/users', AdminController::class, 'users', $admin);
+$router->get('/admin/users/{id}', AdminController::class, 'editUser', $admin);
+$router->post('/admin/users/{id}', AdminController::class, 'updateUser', $admin);
+$router->post('/admin/users/{id}/delete', AdminController::class, 'deleteUser', $admin);
+$router->get('/admin/users/{id}/export', AdminController::class, 'exportUserData', $admin);
+$router->get('/admin/errors', AdminController::class, 'errors', $admin);

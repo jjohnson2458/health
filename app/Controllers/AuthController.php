@@ -169,6 +169,7 @@ class AuthController extends Controller
                 'last_name' => $decrypted['last_name'],
                 'email' => $decrypted['email'],
                 'language' => $user['language'],
+                'role' => $user['role'] ?? 'user',
             ]);
 
             AuditLog::log($user['id'], 'login_complete', 'auth');
@@ -206,13 +207,15 @@ class AuthController extends Controller
         Session::set('auth_verified', true);
         Session::regenerate();
 
-        $user = User::decryptUser(User::find($userId));
+        $rawUser = User::find($userId);
+        $user = User::decryptUser($rawUser);
         Session::set('user_data', [
             'id' => $userId,
             'first_name' => $user['first_name'],
             'last_name' => $user['last_name'],
             'email' => $user['email'],
             'language' => $user['language'],
+            'role' => $rawUser['role'] ?? 'user',
         ]);
 
         AuditLog::log($userId, 'login_complete', 'auth');

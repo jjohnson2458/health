@@ -55,6 +55,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/guide"><i class="bi bi-book"></i> <?= e(__('nav.guide')) ?></a>
                     </li>
+                    <?php $userData = \Core\Session::get('user_data', []); ?>
+                    <?php if (($userData['role'] ?? '') === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="nav-link text-warning" href="/admin"><i class="bi bi-shield-lock"></i> Admin</a>
+                    </li>
+                    <?php endif; ?>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">

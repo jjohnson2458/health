@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `users` (
     `phone_number` VARCHAR(500) DEFAULT NULL COMMENT 'AES-256 encrypted',
     `phone_hash` VARCHAR(64) DEFAULT NULL,
     `sms_opt_in` TINYINT(1) NOT NULL DEFAULT 0,
+    `role` ENUM('user', 'admin') NOT NULL DEFAULT 'user',
     `language` ENUM('en', 'es') NOT NULL DEFAULT 'en',
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
