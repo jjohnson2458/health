@@ -44,13 +44,13 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/planner"><i class="bi bi-calendar-check"></i> <?= e(__('nav.planner')) ?></a>
+                        <a class="nav-link" href="/planner"><i class="bi bi-calendar-check"></i> <?= e(__('nav.planner')) ?><?php if (!isPremium()): ?> <span class="badge bg-warning text-dark" style="font-size:0.6rem">PRO</span><?php endif; ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/medications"><i class="bi bi-capsule"></i> <?= e(__('nav.medications')) ?></a>
+                        <a class="nav-link" href="/medications"><i class="bi bi-capsule"></i> <?= e(__('nav.medications')) ?><?php if (!isPremium()): ?> <span class="badge bg-warning text-dark" style="font-size:0.6rem">PRO</span><?php endif; ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/appointments"><i class="bi bi-calendar-event"></i> <?= e(__('nav.appointments')) ?></a>
+                        <a class="nav-link" href="/appointments"><i class="bi bi-calendar-event"></i> <?= e(__('nav.appointments')) ?><?php if (!isPremium()): ?> <span class="badge bg-warning text-dark" style="font-size:0.6rem">PRO</span><?php endif; ?></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/guide"><i class="bi bi-book"></i> <?= e(__('nav.guide')) ?></a>
@@ -63,6 +63,15 @@
                     <?php endif; ?>
                 </ul>
                 <ul class="navbar-nav">
+                    <?php if (!isPremium()): ?>
+                    <li class="nav-item">
+                        <a class="nav-link text-warning fw-bold" href="/pricing"><i class="bi bi-star-fill"></i> <?= e(__('nav.upgrade')) ?></a>
+                    </li>
+                    <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/subscription/portal"><i class="bi bi-credit-card"></i> <?= e(__('nav.billing')) ?></a>
+                    </li>
+                    <?php endif; ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-translate"></i> <?= e(__('language')) ?>

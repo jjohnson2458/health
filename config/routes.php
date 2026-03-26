@@ -14,12 +14,16 @@ use App\Controllers\FoodTrackerController;
 use App\Controllers\PlannerController;
 use App\Controllers\GuideController;
 use App\Controllers\LanguageController;
+use App\Controllers\SubscriptionController;
+use App\Controllers\AffiliateController;
 use App\Middleware\AdminMiddleware;
 use App\Middleware\AuthMiddleware;
 use App\Middleware\GuestMiddleware;
 use App\Middleware\CsrfMiddleware;
+use App\Middleware\PremiumMiddleware;
 
 $auth = [AuthMiddleware::class, CsrfMiddleware::class];
+$premium = [AuthMiddleware::class, PremiumMiddleware::class, CsrfMiddleware::class];
 $admin = [AdminMiddleware::class, CsrfMiddleware::class];
 $guest = [GuestMiddleware::class, CsrfMiddleware::class];
 $csrf = [CsrfMiddleware::class];
@@ -48,13 +52,20 @@ $router->get('/hipaa', LegalController::class, 'hipaaNotice');
 // Language switch
 $router->get('/lang/{lang}', LanguageController::class, 'switch');
 
-// Authenticated routes
+// Subscription & Pricing (public pricing page, auth for checkout)
+$router->get('/pricing', SubscriptionController::class, 'pricing');
+$router->post('/subscription/checkout', SubscriptionController::class, 'checkout', $auth);
+$router->get('/subscription/success', SubscriptionController::class, 'success', $auth);
+$router->get('/subscription/portal', SubscriptionController::class, 'portal', $auth);
+$router->post('/subscription/webhook', SubscriptionController::class, 'webhook');
+
+// Affiliate redirect (public)
+$router->get('/affiliate/{partner}', AffiliateController::class, 'redirectPartner');
+
+// Authenticated routes (Free tier)
 $router->get('/dashboard', DashboardController::class, 'index', $auth);
 
 $router->get('/entries', EntryController::class, 'index', $auth);
-$router->get('/export/csv', ExportController::class, 'csv', $auth);
-$router->get('/export/print', ExportController::class, 'printView', $auth);
-$router->get('/export/pdf', ExportController::class, 'pdf', $auth);
 
 $router->get('/entry', EntryController::class, 'create', $auth);
 $router->post('/entry', EntryController::class, 'store', $auth);
@@ -72,33 +83,38 @@ $router->post('/calculator/macros', CalculatorController::class, 'calculateMacro
 
 $router->get('/calculator/food', FoodTrackerController::class, 'index', $auth);
 
-$router->get('/planner', PlannerController::class, 'index', $auth);
-$router->post('/planner', PlannerController::class, 'create', $auth);
-$router->get('/planner/data', PlannerController::class, 'data', $auth);
-
 $router->get('/guide', GuideController::class, 'index', $auth);
 $router->get('/guide/features', GuideController::class, 'features', $auth);
 
-// Medications
-$router->get('/medications', MedicationController::class, 'index', $auth);
-$router->get('/medications/create', MedicationController::class, 'create', $auth);
-$router->post('/medications', MedicationController::class, 'store', $auth);
-$router->get('/medications/share', MedicationController::class, 'share', $auth);
-$router->get('/medications/{id}', MedicationController::class, 'edit', $auth);
-$router->post('/medications/{id}', MedicationController::class, 'update', $auth);
-$router->post('/medications/{id}/discontinue', MedicationController::class, 'discontinue', $auth);
-$router->post('/medications/{id}/reactivate', MedicationController::class, 'reactivate', $auth);
-$router->get('/medications/{id}/history', MedicationController::class, 'history', $auth);
+// Premium routes (require Premium tier)
+$router->get('/planner', PlannerController::class, 'index', $premium);
+$router->post('/planner', PlannerController::class, 'create', $premium);
+$router->get('/planner/data', PlannerController::class, 'data', $premium);
 
-// Appointments
-$router->get('/appointments', AppointmentController::class, 'index', $auth);
-$router->get('/appointments/calendar', AppointmentController::class, 'calendar', $auth);
-$router->get('/appointments/create', AppointmentController::class, 'create', $auth);
-$router->post('/appointments', AppointmentController::class, 'store', $auth);
-$router->get('/appointments/{id}', AppointmentController::class, 'edit', $auth);
-$router->post('/appointments/{id}', AppointmentController::class, 'update', $auth);
-$router->post('/appointments/{id}/complete', AppointmentController::class, 'complete', $auth);
-$router->post('/appointments/{id}/cancel', AppointmentController::class, 'cancel', $auth);
+$router->get('/export/csv', ExportController::class, 'csv', $premium);
+$router->get('/export/print', ExportController::class, 'printView', $premium);
+$router->get('/export/pdf', ExportController::class, 'pdf', $premium);
+
+// Medications (Premium)
+$router->get('/medications', MedicationController::class, 'index', $premium);
+$router->get('/medications/create', MedicationController::class, 'create', $premium);
+$router->post('/medications', MedicationController::class, 'store', $premium);
+$router->get('/medications/share', MedicationController::class, 'share', $premium);
+$router->get('/medications/{id}', MedicationController::class, 'edit', $premium);
+$router->post('/medications/{id}', MedicationController::class, 'update', $premium);
+$router->post('/medications/{id}/discontinue', MedicationController::class, 'discontinue', $premium);
+$router->post('/medications/{id}/reactivate', MedicationController::class, 'reactivate', $premium);
+$router->get('/medications/{id}/history', MedicationController::class, 'history', $premium);
+
+// Appointments (Premium)
+$router->get('/appointments', AppointmentController::class, 'index', $premium);
+$router->get('/appointments/calendar', AppointmentController::class, 'calendar', $premium);
+$router->get('/appointments/create', AppointmentController::class, 'create', $premium);
+$router->post('/appointments', AppointmentController::class, 'store', $premium);
+$router->get('/appointments/{id}', AppointmentController::class, 'edit', $premium);
+$router->post('/appointments/{id}', AppointmentController::class, 'update', $premium);
+$router->post('/appointments/{id}/complete', AppointmentController::class, 'complete', $premium);
+$router->post('/appointments/{id}/cancel', AppointmentController::class, 'cancel', $premium);
 
 // Admin routes
 $router->get('/admin', AdminController::class, 'dashboard', $admin);

@@ -97,3 +97,39 @@ function formatDate(string $date, string $format = 'M j, Y'): string
 {
     return date($format, strtotime($date));
 }
+
+/**
+ * Get the current user's subscription tier.
+ */
+function userTier(): string
+{
+    $userData = Session::get('user_data', []);
+    return $userData['subscription_tier'] ?? 'free';
+}
+
+/**
+ * Check if user has at least the given tier.
+ */
+function hasTier(string $requiredTier): bool
+{
+    $tiers = ['free' => 0, 'premium' => 1, 'premium_plus' => 2];
+    $current = $tiers[userTier()] ?? 0;
+    $required = $tiers[$requiredTier] ?? 0;
+    return $current >= $required;
+}
+
+/**
+ * Check if user is on premium or above.
+ */
+function isPremium(): bool
+{
+    return hasTier('premium');
+}
+
+/**
+ * Check if user is on premium plus.
+ */
+function isPremiumPlus(): bool
+{
+    return hasTier('premium_plus');
+}

@@ -146,22 +146,6 @@ return [
         'actual' => 'Actual Progress',
     ],
 
-    // Navigation (additions)
-    'nav' => [
-        'dashboard' => 'Dashboard',
-        'entries' => 'Daily Entry',
-        'analytics' => 'Analytics',
-        'calculators' => 'Calculators',
-        'calorie_calc' => 'Calorie Calculator',
-        'macro_calc' => 'Macro Calculator',
-        'food_tracker' => 'Food Tracker',
-        'planner' => 'Weight Loss Planner',
-        'medications' => 'Medications',
-        'appointments' => 'Appointments',
-        'guide' => 'User Guide',
-        'profile' => 'Profile',
-    ],
-
     // Medications
     'medications' => [
         'title' => 'My Medications',
@@ -247,6 +231,93 @@ return [
         'privacy_title' => 'Privacy Policy',
         'hipaa' => 'HIPAA Notice',
         'hipaa_title' => 'HIPAA Privacy Notice',
+    ],
+
+    // Navigation
+    'nav' => [
+        'dashboard' => 'Dashboard',
+        'entries' => 'Daily Entry',
+        'analytics' => 'Analytics',
+        'calculators' => 'Calculators',
+        'calorie_calc' => 'Calorie Calculator',
+        'macro_calc' => 'Macro Calculator',
+        'food_tracker' => 'Food Tracker',
+        'planner' => 'Weight Loss Planner',
+        'medications' => 'Medications',
+        'appointments' => 'Appointments',
+        'guide' => 'User Guide',
+        'profile' => 'Profile',
+        'upgrade' => 'Upgrade',
+        'billing' => 'Billing',
+    ],
+
+    // Subscription & Pricing
+    'subscription' => [
+        'pricing_title' => 'Choose Your Plan',
+        'pricing_subtitle' => 'Start free, upgrade when you need more. All plans include HIPAA-compliant encryption.',
+        'monthly' => 'Monthly',
+        'yearly' => 'Yearly',
+        'save_20' => 'Save 20%',
+        'month' => 'mo',
+        'year' => 'yr',
+        'current_plan' => 'Current Plan',
+        'most_popular' => 'Most Popular',
+        'tier_free' => 'Free',
+        'tier_premium' => 'Premium',
+        'tier_premium_plus' => 'Premium+',
+        'forever_free' => 'Free forever',
+        'upgrade' => 'Upgrade Now',
+        'manage' => 'Manage Subscription',
+        'included' => 'Included in all plans',
+        'upgrade_required' => 'This feature requires a Premium subscription. Choose a plan below to unlock it.',
+        'premium_feature' => 'Premium Feature',
+
+        // Free features
+        'feature_weight' => 'Weight & daily health tracking',
+        'feature_7day' => 'Basic 7-day analytics',
+        'feature_calculators' => 'Calorie & macro calculators',
+        'feature_food_basic' => 'Food tracker (10 entries/day)',
+        'feature_bilingual' => 'English & Spanish',
+        'feature_encryption' => '2FA & AES-256 encryption',
+
+        // Premium features
+        'everything_free' => 'Everything in Free',
+        'feature_unlimited_food' => 'Unlimited food tracking',
+        'feature_full_analytics' => '30/90/365-day analytics',
+        'feature_planner' => 'Weight loss planner',
+        'feature_medications' => 'Medication management',
+        'feature_appointments' => 'Appointment tracking',
+        'feature_export' => 'Data export (CSV, PDF, print)',
+
+        // Premium+ features
+        'everything_premium' => 'Everything in Premium',
+        'feature_cgm' => 'CGM integration (Libre/Dexcom)',
+        'feature_provider_push' => 'Provider Rx push',
+        'feature_diabetes_analytics' => 'Advanced diabetes analytics',
+        'feature_caregiver' => 'Caregiver dashboard',
+
+        // Checkout
+        'stripe_not_configured' => 'Payment processing is not yet configured. Please try again later.',
+        'checkout_error' => 'Unable to start checkout. Please try again.',
+        'portal_error' => 'Unable to open billing portal. Please try again.',
+        'activated' => 'Your subscription is now active! Enjoy your premium features.',
+
+        // Affiliate partners
+        'partners_title' => 'Recommended Health Partners',
+        'partners_subtitle' => 'Tools and services we recommend to complement your health journey.',
+        'affiliate_weight_loss' => 'Weight loss program',
+        'affiliate_calorie' => 'Calorie tracking',
+        'affiliate_cgm' => 'CGM coaching',
+        'affiliate_supplements' => 'Health supplements',
+
+        // FAQ
+        'faq_title' => 'Frequently Asked Questions',
+        'faq_cancel_q' => 'Can I cancel anytime?',
+        'faq_cancel_a' => 'Yes! Cancel anytime from your billing portal. You keep access until the end of your billing period.',
+        'faq_hipaa_q' => 'Is my data still HIPAA compliant?',
+        'faq_hipaa_a' => 'Absolutely. All plans include the same AES-256 encryption and HIPAA compliance. We never compromise on security.',
+        'faq_data_q' => 'What happens to my data if I downgrade?',
+        'faq_data_a' => 'Your data is always yours. If you downgrade, premium features become view-only but nothing is deleted.',
     ],
 
     // Validation

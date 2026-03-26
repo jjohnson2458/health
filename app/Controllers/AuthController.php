@@ -170,6 +170,7 @@ class AuthController extends Controller
                 'email' => $decrypted['email'],
                 'language' => $user['language'],
                 'role' => $user['role'] ?? 'user',
+                'subscription_tier' => $user['subscription_tier'] ?? 'free',
             ]);
 
             AuditLog::log($user['id'], 'login_complete', 'auth');
@@ -216,6 +217,7 @@ class AuthController extends Controller
             'email' => $user['email'],
             'language' => $user['language'],
             'role' => $rawUser['role'] ?? 'user',
+            'subscription_tier' => $rawUser['subscription_tier'] ?? 'free',
         ]);
 
         AuditLog::log($userId, 'login_complete', 'auth');

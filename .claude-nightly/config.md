@@ -4,6 +4,7 @@
 - unit_tests: true
 - playwright: true
 - cleanup: true
+- subscription_maintenance: true
 - security_audit: true
 - docs: true
 - user_guide: true
@@ -37,6 +38,14 @@ On failure: email
 - Purge old login_attempts entries (older than 30 days)
 - Clear storage/logs/*.log files older than 30 days
 - Clear storage/cache/*
+- Purge affiliate_clicks older than 1 year
+
+### subscription_maintenance
+- Cancel expired subscriptions where cancel_at_period_end = 1 AND current_period_end < NOW()
+- Sync user subscription_tier column with active subscription status
+- Log count of active subscriptions by tier (free/premium/premium_plus)
+- Log affiliate click stats for the past 24 hours
+- Flag any subscriptions in 'past_due' status for more than 7 days
 
 ### security_audit
 - Run `composer audit` for known vulnerabilities
