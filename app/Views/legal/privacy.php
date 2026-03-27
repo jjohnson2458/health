@@ -57,7 +57,7 @@
                 <p>Your data is retained for as long as your account is active. Audit logs are retained for a minimum of 6 years per HIPAA requirements. Upon account deletion, all personal and health data is permanently removed.</p>
 
                 <h5>7. Children's Privacy</h5>
-                <p>Claude Health is not intended for use by individuals under 18. We do not knowingly collect information from children.</p>
+                <p>VQ Healthy is not intended for use by individuals under 18. We do not knowingly collect information from children.</p>
 
                 <h5>8. Contact</h5>
                 <p>For privacy inquiries: <a href="mailto:email4johnson@gmail.com">email4johnson@gmail.com</a></p>

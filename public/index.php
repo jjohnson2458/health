@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Claude Health - Front Controller
+ * VQ Healthy - Front Controller
  * All requests are routed through this file.
  */
 

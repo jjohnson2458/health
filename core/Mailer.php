@@ -33,7 +33,7 @@ class Mailer
             $mail->Port       = (int) ($_ENV['SMTP_PORT'] ?? 587);
 
             $fromEmail = $_ENV['SMTP_FROM_EMAIL'] ?? $_ENV['SMTP_USERNAME'] ?? 'noreply@example.com';
-            $fromName  = $_ENV['MAIL_FROM_NAME'] ?? 'Claude Health';
+            $fromName  = $_ENV['MAIL_FROM_NAME'] ?? 'VQ Healthy';
 
             $mail->setFrom($fromEmail, $fromName);
             $mail->addAddress($to);

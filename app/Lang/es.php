@@ -2,7 +2,7 @@
 
 return [
     // General
-    'app_name' => 'Claude Health',
+    'app_name' => 'VQ Healthy',
     'tagline' => 'Su rastreador de salud compatible con HIPAA',
     'hipaa_notice' => 'Todos sus datos cumplen con HIPAA y están encriptados.',
     'save' => 'Guardar',

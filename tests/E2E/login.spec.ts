@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Login Page', () => {
   test('loads with correct elements', async ({ page }) => {
     await page.goto('/login');
-    await expect(page.locator('h3')).toContainText('Claude Health');
+    await expect(page.locator('h3')).toContainText('VQ Healthy');
     await expect(page.locator('input[name="email"]')).toBeVisible();
     await expect(page.locator('input[name="password"]')).toBeVisible();
     await expect(page.locator('button[type="submit"]')).toBeVisible();

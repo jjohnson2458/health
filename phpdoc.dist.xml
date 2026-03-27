@@ -5,7 +5,7 @@
     xmlns="https://www.phpdoc.org/changes/3.0"
     xsi:noNamespaceSchemaLocation="https://docs.phpdoc.org/latest/phpdoc.xsd"
 >
-    <title>Claude Health API Documentation</title>
+    <title>VQ Healthy API Documentation</title>
 
     <paths>
         <output>docs/phpdoc</output>

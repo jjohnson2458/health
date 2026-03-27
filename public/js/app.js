@@ -1,4 +1,4 @@
-// Claude Health - Main JS
+// VQ Healthy - Main JS
 
 document.addEventListener('DOMContentLoaded', function() {
     // Auto-dismiss alerts after 5 seconds

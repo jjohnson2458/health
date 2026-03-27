@@ -1,4 +1,4 @@
-# robots.txt for Claude Health - Private health application
+# robots.txt for VQ Healthy - Private health application
 # Only legal/public pages are indexable
 
 User-agent: *

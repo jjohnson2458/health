@@ -1,4 +1,4 @@
-# Claude Health - Setup Guide
+# VQ Healthy - Setup Guide
 
 ## Prerequisites
 
@@ -294,7 +294,7 @@ SMTP_REPLY_DOMAIN=your-domain.com
 
 ## 11. HIPAA Compliance Notes
 
-Claude Health is designed with HIPAA technical safeguards in mind. The following measures are implemented:
+VQ Healthy is designed with HIPAA technical safeguards in mind. The following measures are implemented:
 
 ### Encryption at rest
 

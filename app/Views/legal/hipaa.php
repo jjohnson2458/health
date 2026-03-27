@@ -7,14 +7,14 @@
 
                 <div class="alert alert-success">
                     <i class="bi bi-shield-lock"></i>
-                    <strong>Claude Health is designed to be HIPAA compliant.</strong> We protect your Protected Health Information (PHI) with the same standards used by healthcare organizations.
+                    <strong>VQ Healthy is designed to be HIPAA compliant.</strong> We protect your Protected Health Information (PHI) with the same standards used by healthcare organizations.
                 </div>
 
                 <h5>1. What is HIPAA?</h5>
                 <p>The Health Insurance Portability and Accountability Act (HIPAA) is a federal law that requires safeguards to protect the privacy and security of personal health information.</p>
 
                 <h5>2. Protected Health Information (PHI)</h5>
-                <p>PHI includes any individually identifiable health information. In Claude Health, this includes:</p>
+                <p>PHI includes any individually identifiable health information. In VQ Healthy, this includes:</p>
                 <ul>
                     <li>Your name and contact information</li>
                     <li>Health metrics (weight, blood sugar, heart rate, etc.)</li>

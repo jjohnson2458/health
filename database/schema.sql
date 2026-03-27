@@ -1,4 +1,4 @@
--- Claude Health Database Schema
+-- VQ Healthy Database Schema
 -- HIPAA-compliant health & weight loss tracking
 
 CREATE DATABASE IF NOT EXISTS `claude_health`

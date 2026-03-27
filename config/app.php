@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'name' => $_ENV['APP_NAME'] ?? 'Claude Health',
+    'name' => $_ENV['APP_NAME'] ?? 'VQ Healthy',
     'env' => $_ENV['APP_ENV'] ?? 'local',
     'url' => $_ENV['APP_URL'] ?? 'http://health.local',
     'timezone' => 'America/New_York',

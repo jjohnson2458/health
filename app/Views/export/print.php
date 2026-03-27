@@ -223,7 +223,7 @@
 
     <div class="header">
         <h1>Health Report</h1>
-        <div class="subtitle">Claude Health - Personal Health Tracker</div>
+        <div class="subtitle">VQ Healthy - Personal Health Tracker</div>
         <div class="date-range">
             Patient: <strong><?= htmlspecialchars($userName) ?></strong>
             <?php if ($startDate || $endDate): ?>
@@ -382,7 +382,7 @@
     </div>
 
     <div class="footer">
-        <p>This report was generated from Claude Health on <?= date('F j, Y \a\t g:i A') ?>.</p>
+        <p>This report was generated from VQ Healthy on <?= date('F j, Y \a\t g:i A') ?>.</p>
         <p>This document contains protected health information (PHI). Handle in accordance with HIPAA regulations.</p>
     </div>
 </body>

@@ -6,10 +6,10 @@
                 <p class="text-muted small text-center">Last updated: March 23, 2026</p>
 
                 <h5>1. Acceptance of Terms</h5>
-                <p>By accessing or using Claude Health ("Service"), you agree to be bound by these Terms of Service. If you do not agree, do not use the Service.</p>
+                <p>By accessing or using VQ Healthy ("Service"), you agree to be bound by these Terms of Service. If you do not agree, do not use the Service.</p>
 
                 <h5>2. Description of Service</h5>
-                <p>Claude Health is a HIPAA-compliant health tracking application that allows users to log health metrics, manage medications, track appointments, and monitor glucose data. The Service is provided by VisionQuest Services LLC.</p>
+                <p>VQ Healthy is a HIPAA-compliant health tracking application that allows users to log health metrics, manage medications, track appointments, and monitor glucose data. The Service is provided by VisionQuest Services LLC.</p>
 
                 <h5>3. User Accounts</h5>
                 <p>You must provide accurate information when registering. You are responsible for maintaining the confidentiality of your account credentials. You must notify us immediately of any unauthorized use of your account.</p>
@@ -25,7 +25,7 @@
                 </ul>
 
                 <h5>5. Health Information Disclaimer</h5>
-                <p><strong>Claude Health is not a medical device and does not provide medical advice.</strong> The Service is intended for personal health tracking and information purposes only. Always consult a qualified healthcare provider for medical decisions. Do not rely on this Service for emergency medical situations.</p>
+                <p><strong>VQ Healthy is not a medical device and does not provide medical advice.</strong> The Service is intended for personal health tracking and information purposes only. Always consult a qualified healthcare provider for medical decisions. Do not rely on this Service for emergency medical situations.</p>
 
                 <h5>6. Data Handling</h5>
                 <p>All personal health information (PHI) is encrypted using AES-256 encryption at rest. Data transmission is protected via TLS/SSL. See our <a href="/privacy">Privacy Policy</a> and <a href="/hipaa">HIPAA Notice</a> for full details.</p>

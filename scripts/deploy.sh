@@ -1,11 +1,11 @@
 #!/bin/bash
 set -e
 
-# Claude Health Deployment Script
+# VQ Healthy Deployment Script
 # Usage: bash scripts/deploy.sh
 
 DEPLOY_START=$(date '+%Y-%m-%d %H:%M:%S')
-echo "=== Claude Health Deploy ==="
+echo "=== VQ Healthy Deploy ==="
 echo "Started: ${DEPLOY_START}"
 
 # Pull latest code
@@ -42,8 +42,8 @@ if command -v php &>/dev/null; then
     require_once __DIR__ . '/../core/Mailer.php';
     Core\Mailer::send(
         'email4johnson@gmail.com',
-        'Claude Health Deployed - ${COMMIT_HASH}',
-        '<h2>Claude Health Deployed</h2>'
+        'VQ Healthy Deployed - ${COMMIT_HASH}',
+        '<h2>VQ Healthy Deployed</h2>'
         . '<p><strong>Commit:</strong> ${COMMIT_HASH}</p>'
         . '<p><strong>Started:</strong> ${DEPLOY_START}</p>'
         . '<p><strong>Finished:</strong> ${DEPLOY_END}</p>'

@@ -2,7 +2,7 @@
 
 return [
     // General
-    'app_name' => 'Claude Health',
+    'app_name' => 'VQ Healthy',
     'tagline' => 'Your HIPAA-Compliant Health Tracker',
     'hipaa_notice' => 'All your data is HIPAA compliant and encrypted.',
     'save' => 'Save',

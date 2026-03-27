@@ -147,7 +147,7 @@
                 </h2>
                 <div id="guide7" class="accordion-collapse collapse" data-bs-parent="#guideAccordion">
                     <div class="accordion-body">
-                        <p>Claude Health is available in English and Spanish. Switch languages using the <i class="bi bi-translate"></i> button in the navigation bar. Your language preference is saved to your account.</p>
+                        <p>VQ Healthy is available in English and Spanish. Switch languages using the <i class="bi bi-translate"></i> button in the navigation bar. Your language preference is saved to your account.</p>
                     </div>
                 </div>
             </div>

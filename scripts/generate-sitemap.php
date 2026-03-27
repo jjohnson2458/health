@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Sitemap Generator for Claude Health
+ * Sitemap Generator for VQ Healthy
  *
  * Reads the routes file and generates sitemap.xml containing only public routes.
  *
