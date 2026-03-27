@@ -1,11 +1,10 @@
 <!-- Hero Section -->
 <section class="splash-hero position-relative overflow-hidden">
-    <img src="/assets/img/hero-banner.png" alt="Healthcare provider consulting with patient" class="splash-hero-img">
+    <img src="/assets/img/hero-banner-new.jpg" alt="Two women discussing wellness goals" class="splash-hero-img">
     <div class="splash-hero-overlay"></div>
     <div class="splash-hero-content">
         <div class="text-center text-white px-3">
-            <p class="text-uppercase fw-bold mb-3 small" style="letter-spacing:.25em; opacity:.85;">VQ Healthy</p>
-            <h1 class="display-4 fw-bold mb-3" style="font-family: 'Georgia', serif;"><?= e(__('splash.headline')) ?></h1>
+            <h1 class="h2 fw-bold mb-3" style="font-family: 'Georgia', serif;"><?= e(__('splash.headline')) ?></h1>
             <p class="lead mb-4 mx-auto" style="max-width:600px; opacity:.9;"><?= e(__('splash.subheadline')) ?></p>
             <div class="d-flex justify-content-center gap-3 flex-wrap">
                 <a href="/register" class="btn btn-light btn-lg px-4 fw-semibold">
