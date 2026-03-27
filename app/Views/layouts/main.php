@@ -7,6 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="/css/app.css" rel="stylesheet">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#198754">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="VQ Healthy">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.svg">
     <style>
         html { font-size: 14px; }
     </style>
@@ -149,5 +155,26 @@
     <?php if (isset($scripts)): ?>
         <?= $scripts ?>
     <?php endif; ?>
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js')
+                .then(function(reg) {
+                    console.log('[PWA] Service worker registered, scope:', reg.scope);
+                    reg.addEventListener('updatefound', function() {
+                        var newWorker = reg.installing;
+                        newWorker.addEventListener('statechange', function() {
+                            if (newWorker.state === 'activated') {
+                                console.log('[PWA] New version available');
+                            }
+                        });
+                    });
+                })
+                .catch(function(err) {
+                    console.error('[PWA] Service worker registration failed:', err);
+                });
+        });
+    }
+    </script>
 </body>
 </html>

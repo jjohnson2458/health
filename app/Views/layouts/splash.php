@@ -8,6 +8,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="/css/app.css" rel="stylesheet">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#198754">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="VQ Healthy">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.svg">
     <style>
         html { font-size: 14px; }
         .splash-hero { position: relative; }
@@ -23,7 +29,7 @@
             display: flex; align-items: flex-start; justify-content: center;
             padding-top: 15%;
         }
-        .splash-nav { background: #1a1a2e; }
+        .splash-nav { background: #198754; }
     </style>
 </head>
 <body>
@@ -73,5 +79,14 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js')
+                .then(function(reg) { console.log('[PWA] SW registered, scope:', reg.scope); })
+                .catch(function(err) { console.error('[PWA] SW failed:', err); });
+        });
+    }
+    </script>
 </body>
 </html>

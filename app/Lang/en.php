@@ -220,7 +220,12 @@ return [
     // Pagination
     'pagination' => [
         'showing' => 'Showing',
+        'to' => 'to',
         'of' => 'of',
+        'entries' => 'entries',
+        'previous' => 'Previous',
+        'next' => 'Next',
+        'page' => 'Page',
     ],
 
     // Legal

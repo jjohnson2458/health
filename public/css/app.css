@@ -1,5 +1,83 @@
 /* VQ Healthy - Custom Styles */
 
+/* ── Green health/wellness theme override ── */
+:root {
+    --bs-primary: #198754;
+    --bs-primary-rgb: 25, 135, 84;
+    --bs-link-color: #198754;
+    --bs-link-hover-color: #146c43;
+}
+
+.bg-primary {
+    background-color: #198754 !important;
+}
+
+.btn-primary {
+    --bs-btn-bg: #198754;
+    --bs-btn-border-color: #198754;
+    --bs-btn-hover-bg: #146c43;
+    --bs-btn-hover-border-color: #13653f;
+    --bs-btn-active-bg: #13653f;
+    --bs-btn-active-border-color: #115c39;
+    --bs-btn-disabled-bg: #198754;
+    --bs-btn-disabled-border-color: #198754;
+}
+
+.btn-outline-primary {
+    --bs-btn-color: #198754;
+    --bs-btn-border-color: #198754;
+    --bs-btn-hover-bg: #198754;
+    --bs-btn-hover-border-color: #198754;
+    --bs-btn-active-bg: #198754;
+    --bs-btn-active-border-color: #198754;
+}
+
+.text-primary {
+    color: #198754 !important;
+}
+
+.border-primary {
+    border-color: #198754 !important;
+}
+
+a {
+    color: #198754;
+}
+a:hover {
+    color: #146c43;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+    background-color: #198754;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #198754;
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+.form-check-input:checked {
+    background-color: #198754;
+    border-color: #198754;
+}
+
+.nav-link.active,
+.nav-pills .nav-link.active {
+    background-color: #198754;
+}
+
+.page-link:focus {
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+.page-item.active .page-link {
+    background-color: #198754;
+    border-color: #198754;
+}
+/* ── End green theme override ── */
+
 body {
     min-height: 100vh;
     display: flex;
@@ -24,7 +102,7 @@ main {
 .stat-card:hover {
     transform: translateY(-2px);
 }
-.stat-card.weight { border-color: #0d6efd; }
+.stat-card.weight { border-color: #198754; }
 .stat-card.calories { border-color: #ffc107; }
 .stat-card.streak { border-color: #198754; }
 .stat-card.heart { border-color: #dc3545; }

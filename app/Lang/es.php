@@ -238,7 +238,12 @@ return [
     // Pagination
     'pagination' => [
         'showing' => 'Mostrando',
+        'to' => 'a',
         'of' => 'de',
+        'entries' => 'entradas',
+        'previous' => 'Anterior',
+        'next' => 'Siguiente',
+        'page' => 'Página',
     ],
 
     // Legal
