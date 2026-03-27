@@ -9,4 +9,4 @@ Allow: /login
 Allow: /register
 Disallow: /
 
-Sitemap: https://health.visionquest2020.net/sitemap.xml
+Sitemap: https://vqhealthy.com/sitemap.xml

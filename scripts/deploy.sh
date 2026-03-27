@@ -47,7 +47,7 @@ if command -v php &>/dev/null; then
         . '<p><strong>Commit:</strong> ${COMMIT_HASH}</p>'
         . '<p><strong>Started:</strong> ${DEPLOY_START}</p>'
         . '<p><strong>Finished:</strong> ${DEPLOY_END}</p>'
-        . '<p><strong>URL:</strong> <a href=\"https://health.visionquest2020.net\">https://health.visionquest2020.net</a></p>',
+        . '<p><strong>URL:</strong> <a href=\"https://vqhealthy.com\">https://vqhealthy.com</a></p>',
         'claude_health'
     );
     echo \"Deployment email sent.\n\";

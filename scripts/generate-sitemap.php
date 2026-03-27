@@ -8,7 +8,7 @@
  * Usage: php scripts/generate-sitemap.php
  */
 
-$baseUrl = 'https://health.visionquest2020.net';
+$baseUrl = 'https://vqhealthy.com';
 $routesFile = __DIR__ . '/../config/routes.php';
 $outputFile = __DIR__ . '/../public/sitemap.xml';
 
