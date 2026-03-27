@@ -14,6 +14,7 @@ use App\Controllers\FoodTrackerController;
 use App\Controllers\PlannerController;
 use App\Controllers\GuideController;
 use App\Controllers\LanguageController;
+use App\Controllers\SplashController;
 use App\Controllers\SubscriptionController;
 use App\Controllers\AffiliateController;
 use App\Middleware\AdminMiddleware;
@@ -28,8 +29,10 @@ $admin = [AdminMiddleware::class, CsrfMiddleware::class];
 $guest = [GuestMiddleware::class, CsrfMiddleware::class];
 $csrf = [CsrfMiddleware::class];
 
+// Splash page (public)
+$router->get('/', SplashController::class, 'index', [GuestMiddleware::class]);
+
 // Public / Guest routes
-$router->get('/', AuthController::class, 'showLogin', [GuestMiddleware::class]);
 $router->get('/login', AuthController::class, 'showLogin', [GuestMiddleware::class]);
 $router->post('/login', AuthController::class, 'login', $guest);
 $router->get('/register', AuthController::class, 'showRegister', [GuestMiddleware::class]);

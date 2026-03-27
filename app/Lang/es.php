@@ -308,6 +308,56 @@ return [
         'faq_data_a' => 'Sus datos siempre son suyos. Si baja de plan, las funciones premium se vuelven de solo lectura pero nada se elimina.',
     ],
 
+    // Splash / Landing Page
+    'splash' => [
+        'page_title' => 'VQ Healthy - Empoderando Su Viaje de Bienestar',
+        'meta_description' => 'Seguimiento de salud compatible con HIPAA: gestión de peso, seguimiento de medicamentos, calculadoras de calorías y macros, y análisis personalizado.',
+        'headline' => 'Empoderando Su Viaje de Bienestar',
+        'subheadline' => 'Controle su peso, nutrición, medicamentos y signos vitales, todo en una plataforma segura y compatible con HIPAA.',
+        'cta_register' => 'Comience Gratis',
+        'cta_login' => 'Iniciar Sesión',
+
+        // About / Who We Are
+        'about_title' => 'Su Salud, Protegida y Personalizada',
+        'about_p1' => 'VQ Healthy es una plataforma integral de seguimiento de salud diseñada para personas que se toman en serio su bienestar. Ya sea que esté controlando su peso, monitoreando el azúcar en sangre, rastreando medicamentos o planificando citas, lo reunimos todo en un solo lugar seguro.',
+        'about_p2' => 'Construido desde cero con cumplimiento HIPAA, encriptación AES-256 y autenticación de dos factores, sus datos de salud sensibles están protegidos con los mismos estándares utilizados por los proveedores de atención médica.',
+        'stat_hipaa' => 'Compatible con HIPAA',
+        'stat_encryption' => 'Encriptación',
+        'stat_auth' => 'Autenticación',
+
+        // Features
+        'features_title' => 'Todo lo que Necesita para Mantenerse en Camino',
+        'features_subtitle' => 'Herramientas poderosas diseñadas para resultados reales, disponibles en inglés y español.',
+        'feature_tracking' => 'Seguimiento de Salud',
+        'feature_tracking_desc' => 'Registre peso, calorías, macros, ejercicio, frecuencia cardíaca y azúcar en sangre diariamente. Vea tendencias con gráficos interactivos.',
+        'feature_hipaa' => 'Compatible con HIPAA',
+        'feature_hipaa_desc' => 'Sus datos están encriptados en reposo con AES-256 y protegidos por autenticación de dos factores. Nunca comprometemos la seguridad.',
+        'feature_medications' => 'Gestor de Medicamentos',
+        'feature_medications_desc' => 'Rastree recetas activas, dosis, prescriptores e historial. Genere listas de medicamentos compartibles para su médico.',
+        'feature_calculators' => 'Calculadoras Inteligentes',
+        'feature_calculators_desc' => 'Calcule su TMB, TDEE, déficit calórico y objetivos de macros usando fórmulas científicas probadas como Mifflin-St Jeor.',
+        'feature_bilingual' => 'Soporte Bilingüe',
+        'feature_bilingual_desc' => 'Soporte completo en inglés y español en toda la aplicación. Cambie de idioma en cualquier momento con un clic.',
+        'feature_vitals' => 'Signos Vitales y Análisis',
+        'feature_vitals_desc' => 'Monitoree tendencias de frecuencia cardíaca y azúcar en sangre. Vea patrones por día de la semana y progreso a largo plazo.',
+        'feature_planner' => 'Planificador de Pérdida de Peso',
+
+        // Pricing
+        'pricing_title' => 'Precios Simples y Transparentes',
+        'pricing_subtitle' => 'Comience gratis y mejore cuando necesite más. Todos los planes incluyen encriptación compatible con HIPAA.',
+        'billed_yearly' => 'facturado anualmente',
+        'start_free' => 'Comience Gratis Hoy',
+        'view_plans' => 'Ver Todos los Planes',
+        'full_pricing_details' => 'Ver detalles completos de precios y preguntas frecuentes',
+        'pricing_link' => 'Precios',
+
+        // Final CTA
+        'cta_final_title' => '¿Listo para Tomar el Control de Su Salud?',
+        'cta_final_desc' => 'Únase a miles de usuarios que confían en VQ Healthy para su viaje de bienestar. Gratis para comenzar, sin tarjeta de crédito requerida.',
+
+        'rights' => 'Todos los derechos reservados.',
+    ],
+
     // Validation
     'validation' => [
         'required' => 'El campo :field es obligatorio.',

@@ -320,6 +320,56 @@ return [
         'faq_data_a' => 'Your data is always yours. If you downgrade, premium features become view-only but nothing is deleted.',
     ],
 
+    // Splash / Landing Page
+    'splash' => [
+        'page_title' => 'VQ Healthy - Empowering Your Wellness Journey',
+        'meta_description' => 'HIPAA-compliant health tracking with weight management, medication tracking, calorie and macro calculators, and personalized analytics.',
+        'headline' => 'Empowering Your Wellness Journey',
+        'subheadline' => 'Track your weight, nutrition, medications, and vitals — all in one secure, HIPAA-compliant platform.',
+        'cta_register' => 'Get Started Free',
+        'cta_login' => 'Sign In',
+
+        // About / Who We Are
+        'about_title' => 'Your Health, Protected & Personalized',
+        'about_p1' => 'VQ Healthy is a comprehensive health tracking platform built for people who take their wellness seriously. Whether you\'re managing weight loss, monitoring blood sugar, tracking medications, or planning appointments — we bring it all together in one secure place.',
+        'about_p2' => 'Built from the ground up with HIPAA compliance, AES-256 encryption, and two-factor authentication, your sensitive health data is protected with the same standards used by healthcare providers.',
+        'stat_hipaa' => 'HIPAA Compliant',
+        'stat_encryption' => 'Encryption',
+        'stat_auth' => 'Authentication',
+
+        // Features
+        'features_title' => 'Everything You Need to Stay on Track',
+        'features_subtitle' => 'Powerful tools designed for real results, available in English and Spanish.',
+        'feature_tracking' => 'Health Tracking',
+        'feature_tracking_desc' => 'Log weight, calories, macros, exercise, heart rate, and blood sugar daily. See trends over time with interactive charts.',
+        'feature_hipaa' => 'HIPAA Compliant',
+        'feature_hipaa_desc' => 'Your data is encrypted at rest with AES-256 and protected by two-factor authentication. We never compromise on security.',
+        'feature_medications' => 'Medication Manager',
+        'feature_medications_desc' => 'Track active prescriptions, dosages, prescribers, and history. Generate shareable medication lists for your doctor.',
+        'feature_calculators' => 'Smart Calculators',
+        'feature_calculators_desc' => 'Calculate your BMR, TDEE, calorie deficit, and macro targets using proven scientific formulas like Mifflin-St Jeor.',
+        'feature_bilingual' => 'Bilingual Support',
+        'feature_bilingual_desc' => 'Full English and Spanish support throughout the entire application. Switch languages anytime with one click.',
+        'feature_vitals' => 'Vitals & Analytics',
+        'feature_vitals_desc' => 'Monitor heart rate and blood sugar trends. View day-of-week patterns and long-term progress with interactive dashboards.',
+        'feature_planner' => 'Weight Loss Planner',
+
+        // Pricing
+        'pricing_title' => 'Simple, Transparent Pricing',
+        'pricing_subtitle' => 'Start free and upgrade when you need more. All plans include HIPAA-compliant encryption.',
+        'billed_yearly' => 'billed yearly',
+        'start_free' => 'Start Free Today',
+        'view_plans' => 'View All Plans',
+        'full_pricing_details' => 'View full pricing details and FAQ',
+        'pricing_link' => 'Pricing',
+
+        // Final CTA
+        'cta_final_title' => 'Ready to Take Control of Your Health?',
+        'cta_final_desc' => 'Join thousands of users who trust VQ Healthy with their wellness journey. Free to start, no credit card required.',
+
+        'rights' => 'All rights reserved.',
+    ],
+
     // Validation
     'validation' => [
         'required' => 'The :field field is required.',
