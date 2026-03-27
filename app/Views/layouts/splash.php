@@ -16,18 +16,18 @@
         }
         .splash-hero-overlay {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.3) 100%);
+            background: rgba(0,0,0,.6);
         }
         .splash-hero-content {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             display: flex; align-items: center; justify-content: center;
         }
-        .splash-nav { background: rgba(0,0,0,.15); backdrop-filter: blur(8px); }
+        .splash-nav { background: #1a1a2e; }
     </style>
 </head>
 <body>
     <!-- Top Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark splash-nav position-absolute w-100" style="z-index:10;">
+    <nav class="navbar navbar-expand-lg navbar-dark splash-nav">
         <div class="container">
             <a class="navbar-brand fw-bold" href="/">
                 <i class="bi bi-heart-pulse"></i> VQ Healthy
