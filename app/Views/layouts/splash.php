@@ -10,16 +10,18 @@
     <link href="/css/app.css" rel="stylesheet">
     <style>
         html { font-size: 14px; }
-        .splash-hero { position: relative; padding-top: 56px; }
-        .splash-hero-bg {
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background-size: cover; background-position: center 30%;
+        .splash-hero { position: relative; }
+        .splash-hero-img {
+            width: 100%; height: auto; display: block;
         }
         .splash-hero-overlay {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.35) 100%);
+            background: linear-gradient(135deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.3) 100%);
         }
-        .min-vh-75 { min-height: 55vh; }
+        .splash-hero-content {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            display: flex; align-items: center; justify-content: center;
+        }
         .splash-nav { background: rgba(0,0,0,.15); backdrop-filter: blur(8px); }
     </style>
 </head>
