@@ -221,7 +221,7 @@
             var fm = fieldMap[i];
             for (var k = 0; k < fm.keywords.length; k++) {
                 var kw = fm.keywords[k];
-                var regex = new RegExp(kw + '\\s+(?:is\\s+|of\\s+)?([\\d]+\\.?[\\d]*)', 'i');
+                var regex = new RegExp(kw + '(?:\\s+(?:is|of|in|at|was|lbs|lb|kg|pounds|kilos|grams|g|mg|dl|mg\\/dl|mmol|mmol\\/l|bpm|minutes|mins|min|[a-z\\/()]+))*\\s+([\\d]+\\.?[\\d]*)', 'i');
                 var match = lower.match(regex);
                 if (match) {
                     var input = document.getElementById(fm.field);
