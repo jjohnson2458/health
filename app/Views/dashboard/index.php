@@ -4,7 +4,7 @@
         <a href="/entries" class="btn btn-outline-secondary btn-sm me-1">
             <i class="bi bi-journal-text"></i> <?= e(__('entry.history_title')) ?>
         </a>
-        <a href="/export/csv" class="btn btn-outline-success btn-sm me-1">
+        <a href="/export/csv" class="btn btn-outline-success btn-sm me-1 d-none d-md-inline-block">
             <i class="bi bi-download"></i> <?= e(__('export.csv')) ?>
         </a>
         <a href="/entry" class="btn btn-primary btn-sm">
@@ -19,7 +19,7 @@
         <div class="card stat-card weight">
             <div class="card-body py-3">
                 <div class="text-muted small"><?= e(__('dashboard.current_weight')) ?></div>
-                <div class="fs-4 fw-bold"><?= $currentWeight ? e($currentWeight) . ' lbs' : '--' ?></div>
+                <div class="fs-4 fw-bold"><?= $currentWeight ? displayWeight((float)$currentWeight) . (isMetric() ? ' kg' : ' lbs') : '--' ?></div>
             </div>
         </div>
     </div>
