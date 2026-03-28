@@ -55,17 +55,32 @@ return [
         'registration_disabled' => 'New user registration is currently disabled.',
     ],
 
+    // Units
+    'units' => [
+        'toggle' => 'Units',
+        'us' => 'US',
+        'metric' => 'Metric',
+        'weight_lbs' => 'Weight (lbs)',
+        'weight_kg' => 'Weight (kg)',
+        'blood_sugar_mgdl' => 'Blood Sugar (mg/dL)',
+        'blood_sugar_mmol' => 'Blood Sugar (mmol/L)',
+        'height_ft' => 'Height (ft/in)',
+        'height_cm' => 'Height (cm)',
+    ],
+
     // Health Entries
     'entry' => [
         'title' => 'Daily Health Entry',
         'date' => 'Date',
         'weight' => 'Weight (lbs)',
+        'weight_metric' => 'Weight (kg)',
         'calories' => 'Calories',
         'protein' => 'Protein (g)',
         'carbs' => 'Carbs (g)',
         'fat' => 'Fat (g)',
         'heart_rate' => 'Heart Rate (bpm)',
         'blood_sugar' => 'Blood Sugar (mg/dL)',
+        'blood_sugar_metric' => 'Blood Sugar (mmol/L)',
         'exercise_minutes' => 'Exercise (minutes)',
         'exercise_type' => 'Exercise Type',
         'notes' => 'Notes',
@@ -250,6 +265,7 @@ return [
         'planner' => 'Weight Loss Planner',
         'medications' => 'Medications',
         'appointments' => 'Appointments',
+        'history' => 'Entry History',
         'guide' => 'User Guide',
         'profile' => 'Profile',
         'upgrade' => 'Upgrade',

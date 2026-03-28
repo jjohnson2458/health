@@ -62,6 +62,14 @@ class EntryController extends Controller
         $data['exercise_type'] = $this->input('exercise_type');
         $data['notes'] = $this->input('notes');
 
+        // Convert from user's unit system to storage units (US)
+        if (!empty($data['weight'])) {
+            $data['weight'] = inputToLbs((float) $data['weight']);
+        }
+        if (!empty($data['blood_sugar'])) {
+            $data['blood_sugar'] = inputToMgdl((float) $data['blood_sugar']);
+        }
+
         // Check for existing entry on this date
         $existing = HealthEntry::getByUserAndDate($userId, $data['entry_date']);
         if ($existing) {
@@ -121,6 +129,14 @@ class EntryController extends Controller
 
         $data['exercise_type'] = $this->input('exercise_type');
         $data['notes'] = $this->input('notes');
+
+        // Convert from user's unit system to storage units (US)
+        if (!empty($data['weight'])) {
+            $data['weight'] = inputToLbs((float) $data['weight']);
+        }
+        if (!empty($data['blood_sugar'])) {
+            $data['blood_sugar'] = inputToMgdl((float) $data['blood_sugar']);
+        }
 
         HealthEntry::updateEntry((int) $id, $data);
         AuditLog::log($userId, 'edit', 'health_entries', "Updated entry #{$id}");

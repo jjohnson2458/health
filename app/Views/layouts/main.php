@@ -36,6 +36,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/entry"><i class="bi bi-journal-plus"></i> <?= e(__('nav.entries')) ?></a>
                     </li>
+                    <li class="nav-item d-lg-none">
+                        <a class="nav-link" href="/entries"><i class="bi bi-journal-text"></i> <?= e(__('nav.history')) ?></a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/analytics"><i class="bi bi-graph-up"></i> <?= e(__('nav.analytics')) ?></a>
                     </li>
@@ -78,6 +81,11 @@
                         <a class="nav-link" href="/subscription/portal"><i class="bi bi-credit-card"></i> <?= e(__('nav.billing')) ?></a>
                     </li>
                     <?php endif; ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/units/toggle" title="<?= e(__('units.toggle')) ?>">
+                            <i class="bi bi-rulers"></i> <?= isMetric() ? e(__('units.metric')) : e(__('units.us')) ?>
+                        </a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-translate"></i> <?= e(__('language')) ?>

@@ -19,9 +19,10 @@
 
                         <!-- Weight -->
                         <div class="col-md-4">
-                            <label for="weight" class="form-label"><?= e(__('entry.weight')) ?></label>
+                            <label for="weight" class="form-label"><?= e(isMetric() ? __('entry.weight_metric') : __('entry.weight')) ?></label>
+                            <?php $weightVal = ($entry['weight'] ?? '') !== '' ? (isMetric() ? round($entry['weight'] * 0.453592, 1) : $entry['weight']) : ''; ?>
                             <input type="number" step="0.1" class="form-control" id="weight" name="weight"
-                                   value="<?= e($entry['weight'] ?? '') ?>" placeholder="e.g. 185.5">
+                                   value="<?= e($weightVal) ?>" placeholder="<?= isMetric() ? 'e.g. 84.0' : 'e.g. 185.5' ?>">
                         </div>
 
                         <!-- Calories -->
@@ -55,9 +56,10 @@
                                    value="<?= e($entry['heart_rate'] ?? '') ?>" placeholder="e.g. 72">
                         </div>
                         <div class="col-md-6">
-                            <label for="blood_sugar" class="form-label"><?= e(__('entry.blood_sugar')) ?></label>
+                            <label for="blood_sugar" class="form-label"><?= e(isMetric() ? __('entry.blood_sugar_metric') : __('entry.blood_sugar')) ?></label>
+                            <?php $bsVal = ($entry['blood_sugar'] ?? '') !== '' ? (isMetric() ? round($entry['blood_sugar'] * 0.0555, 1) : $entry['blood_sugar']) : ''; ?>
                             <input type="number" step="0.1" class="form-control" id="blood_sugar" name="blood_sugar"
-                                   value="<?= e($entry['blood_sugar'] ?? '') ?>" placeholder="e.g. 95.0">
+                                   value="<?= e($bsVal) ?>" placeholder="<?= isMetric() ? 'e.g. 5.3' : 'e.g. 95.0' ?>">
                         </div>
 
                         <!-- Exercise -->

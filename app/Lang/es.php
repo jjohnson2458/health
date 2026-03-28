@@ -30,6 +30,7 @@ return [
         'planner' => 'Planificador de pérdida de peso',
         'medications' => 'Medicamentos',
         'appointments' => 'Citas',
+        'history' => 'Historial de entradas',
         'guide' => 'Guía del usuario',
         'profile' => 'Perfil',
         'upgrade' => 'Mejorar',
@@ -73,17 +74,32 @@ return [
         'registration_disabled' => 'El registro de nuevos usuarios está deshabilitado.',
     ],
 
+    // Units
+    'units' => [
+        'toggle' => 'Unidades',
+        'us' => 'EE.UU.',
+        'metric' => 'Métrico',
+        'weight_lbs' => 'Peso (lbs)',
+        'weight_kg' => 'Peso (kg)',
+        'blood_sugar_mgdl' => 'Azúcar en sangre (mg/dL)',
+        'blood_sugar_mmol' => 'Azúcar en sangre (mmol/L)',
+        'height_ft' => 'Altura (pies/pulg)',
+        'height_cm' => 'Altura (cm)',
+    ],
+
     // Health Entries
     'entry' => [
         'title' => 'Entrada de salud diaria',
         'date' => 'Fecha',
         'weight' => 'Peso (lbs)',
+        'weight_metric' => 'Peso (kg)',
         'calories' => 'Calorías',
         'protein' => 'Proteína (g)',
         'carbs' => 'Carbohidratos (g)',
         'fat' => 'Grasa (g)',
         'heart_rate' => 'Frecuencia cardíaca (lpm)',
         'blood_sugar' => 'Azúcar en sangre (mg/dL)',
+        'blood_sugar_metric' => 'Azúcar en sangre (mmol/L)',
         'exercise_minutes' => 'Ejercicio (minutos)',
         'exercise_type' => 'Tipo de ejercicio',
         'notes' => 'Notas',

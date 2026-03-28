@@ -133,3 +133,75 @@ function isPremiumPlus(): bool
 {
     return hasTier('premium_plus');
 }
+
+/**
+ * Get the current unit system ('us' or 'metric').
+ */
+function unitSystem(): string
+{
+    return Session::get('unit_system', 'us');
+}
+
+/**
+ * Check if metric units are active.
+ */
+function isMetric(): bool
+{
+    return unitSystem() === 'metric';
+}
+
+/**
+ * Convert weight for display (stored as lbs, display as lbs or kg).
+ */
+function displayWeight(?float $lbs): string
+{
+    if ($lbs === null || $lbs === 0.0) {
+        return '--';
+    }
+    if (isMetric()) {
+        return round($lbs * 0.453592, 1) . '';
+    }
+    return round($lbs, 1) . '';
+}
+
+/**
+ * Convert weight from input to lbs for storage.
+ */
+function inputToLbs(?float $value): ?float
+{
+    if ($value === null) {
+        return null;
+    }
+    if (isMetric()) {
+        return round($value / 0.453592, 2);
+    }
+    return $value;
+}
+
+/**
+ * Convert blood sugar for display (stored as mg/dL, display as mg/dL or mmol/L).
+ */
+function displayBloodSugar(?float $mgdl): string
+{
+    if ($mgdl === null || $mgdl === 0.0) {
+        return '--';
+    }
+    if (isMetric()) {
+        return round($mgdl * 0.0555, 1) . '';
+    }
+    return round($mgdl, 0) . '';
+}
+
+/**
+ * Convert blood sugar from input to mg/dL for storage.
+ */
+function inputToMgdl(?float $value): ?float
+{
+    if ($value === null) {
+        return null;
+    }
+    if (isMetric()) {
+        return round($value / 0.0555, 1);
+    }
+    return $value;
+}

@@ -15,6 +15,7 @@ use App\Controllers\PlannerController;
 use App\Controllers\GuideController;
 use App\Controllers\LanguageController;
 use App\Controllers\SplashController;
+use App\Controllers\UnitController;
 use App\Controllers\SubscriptionController;
 use App\Controllers\AffiliateController;
 use App\Middleware\AdminMiddleware;
@@ -54,6 +55,9 @@ $router->get('/hipaa', LegalController::class, 'hipaaNotice');
 
 // Language switch
 $router->get('/lang/{lang}', LanguageController::class, 'switch');
+
+// Unit system toggle (US/Metric)
+$router->get('/units/toggle', UnitController::class, 'toggle');
 
 // Subscription & Pricing (public pricing page, auth for checkout)
 $router->get('/pricing', SubscriptionController::class, 'pricing');
