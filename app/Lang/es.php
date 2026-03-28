@@ -108,6 +108,11 @@ return [
         'deleted' => 'Entrada eliminada.',
         'history_title' => 'Historial de entradas',
         'no_entries' => 'No se encontraron entradas.',
+        'smart_entry' => 'Entrada Inteligente - Toque para Hablar',
+        'listening' => 'Escuchando...',
+        'stop_listening' => 'Toque para Detener',
+        'voice_not_supported' => 'Voz no soportada en este navegador',
+        'mic_denied' => 'Acceso al micrófono denegado. Permita el acceso al micrófono.',
     ],
 
     // Dashboard

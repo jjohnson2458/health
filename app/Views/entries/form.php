@@ -5,7 +5,18 @@
                 <i class="bi bi-journal-plus"></i> <?= e(__('entry.title')) ?>
             </div>
             <div class="card-body entry-form">
-                <form method="POST" action="<?= $entry ? '/entry/' . $entry['id'] : '/entry' ?>">
+                <!-- Smart Entry Voice Input -->
+                <div id="smart-entry-bar" class="mb-3">
+                    <button type="button" id="smart-entry-btn" class="btn btn-outline-primary w-100">
+                        <i class="bi bi-mic"></i> <span id="smart-entry-label"><?= e(__('entry.smart_entry')) ?></span>
+                    </button>
+                    <div id="smart-entry-status" class="text-center small mt-2 d-none">
+                        <span id="smart-entry-indicator" class="text-danger"><i class="bi bi-record-circle"></i> <?= e(__('entry.listening')) ?></span>
+                        <div id="smart-entry-transcript" class="text-muted fst-italic mt-1"></div>
+                    </div>
+                </div>
+
+                <form method="POST" action="<?= $entry ? '/entry/' . $entry['id'] : '/entry' ?>" id="entry-form">
                     <?= csrf_field() ?>
 
                     <div class="row g-3">
@@ -111,3 +122,197 @@
         </div>
     </div>
 </div>
+
+<script>
+(function() {
+    var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    var btn = document.getElementById('smart-entry-btn');
+    var status = document.getElementById('smart-entry-status');
+    var transcript = document.getElementById('smart-entry-transcript');
+    var label = document.getElementById('smart-entry-label');
+    var form = document.getElementById('entry-form');
+
+    if (!SpeechRecognition) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="bi bi-mic-mute"></i> <?= e(__('entry.voice_not_supported')) ?>';
+        return;
+    }
+
+    var recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = '<?= e(\Core\Session::get('lang', 'en')) === 'es' ? 'es-US' : 'en-US' ?>';
+
+    var isListening = false;
+    var fullTranscript = '';
+
+    // Field keyword mappings
+    var fieldMap = [
+        { keywords: ['weight', 'peso', 'weigh'], field: 'weight' },
+        { keywords: ['calories', 'calorie', 'calorías', 'calorias', 'cal'], field: 'calories' },
+        { keywords: ['protein', 'proteína', 'proteina'], field: 'protein_g' },
+        { keywords: ['carbs', 'carb', 'carbohydrates', 'carbohidratos'], field: 'carbs_g' },
+        { keywords: ['fat', 'fats', 'grasa'], field: 'fat_g' },
+        { keywords: ['heart rate', 'heart', 'pulse', 'pulso', 'frecuencia'], field: 'heart_rate' },
+        { keywords: ['blood sugar', 'sugar', 'glucose', 'azúcar', 'azucar', 'glucosa'], field: 'blood_sugar' },
+        { keywords: ['exercise', 'minutes', 'ejercicio', 'minutos'], field: 'exercise_minutes' }
+    ];
+
+    // Exercise type keywords
+    var exerciseTypes = {
+        'walking': 'Walking', 'walk': 'Walking', 'walked': 'Walking', 'caminar': 'Walking',
+        'running': 'Running', 'run': 'Running', 'ran': 'Running', 'correr': 'Running',
+        'cycling': 'Cycling', 'bike': 'Cycling', 'biking': 'Cycling', 'ciclismo': 'Cycling',
+        'swimming': 'Swimming', 'swim': 'Swimming', 'swam': 'Swimming', 'nadar': 'Swimming',
+        'weight training': 'Weight Training', 'weights': 'Weight Training', 'lifting': 'Weight Training', 'pesas': 'Weight Training',
+        'yoga': 'Yoga',
+        'hiit': 'HIIT', 'hit': 'HIIT', 'interval': 'HIIT'
+    };
+
+    // Word-to-number map
+    var wordNumbers = {
+        'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5,
+        'six': 6, 'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10,
+        'eleven': 11, 'twelve': 12, 'thirteen': 13, 'fourteen': 14, 'fifteen': 15,
+        'sixteen': 16, 'seventeen': 17, 'eighteen': 18, 'nineteen': 19, 'twenty': 20,
+        'thirty': 30, 'forty': 40, 'fifty': 50, 'sixty': 60, 'seventy': 70,
+        'eighty': 80, 'ninety': 90, 'hundred': 100, 'thousand': 1000
+    };
+
+    function convertWordNumbers(text) {
+        var words = text.toLowerCase().split(/\s+/);
+        var result = [];
+        var numAccum = 0;
+        var hasNum = false;
+
+        for (var i = 0; i < words.length; i++) {
+            var w = words[i];
+            if (wordNumbers[w] !== undefined) {
+                var val = wordNumbers[w];
+                if (val === 100) { numAccum = (numAccum || 1) * 100; }
+                else if (val === 1000) { numAccum = (numAccum || 1) * 1000; }
+                else { numAccum += val; }
+                hasNum = true;
+            } else {
+                if (hasNum) { result.push(String(numAccum)); numAccum = 0; hasNum = false; }
+                result.push(w);
+            }
+        }
+        if (hasNum) result.push(String(numAccum));
+        return result.join(' ');
+    }
+
+    function parseAndFill(text) {
+        text = convertWordNumbers(text);
+        var lower = text.toLowerCase();
+        var filled = [];
+
+        // Check for exercise type
+        for (var word in exerciseTypes) {
+            if (lower.indexOf(word) !== -1) {
+                var sel = document.getElementById('exercise_type');
+                if (sel) { sel.value = exerciseTypes[word]; filled.push('exercise_type → ' + exerciseTypes[word]); }
+                break;
+            }
+        }
+
+        // Parse field values
+        for (var i = 0; i < fieldMap.length; i++) {
+            var fm = fieldMap[i];
+            for (var k = 0; k < fm.keywords.length; k++) {
+                var kw = fm.keywords[k];
+                var regex = new RegExp(kw + '\\s+(?:is\\s+|of\\s+)?([\\d]+\\.?[\\d]*)', 'i');
+                var match = lower.match(regex);
+                if (match) {
+                    var input = document.getElementById(fm.field);
+                    if (input) {
+                        input.value = match[1];
+                        input.classList.add('border-success');
+                        setTimeout(function(el) { el.classList.remove('border-success'); }, 3000, input);
+                        filled.push(fm.field + ' → ' + match[1]);
+                    }
+                    break;
+                }
+            }
+        }
+
+        return filled;
+    }
+
+    function checkSubmitCommand(text) {
+        var lower = text.toLowerCase();
+        var cmds = ['submit', 'save this', 'save it', 'save entry', 'guardar', 'enviar'];
+        for (var i = 0; i < cmds.length; i++) {
+            if (lower.indexOf(cmds[i]) !== -1) return true;
+        }
+        return false;
+    }
+
+    btn.addEventListener('click', function() {
+        if (isListening) {
+            recognition.stop();
+            return;
+        }
+        isListening = true;
+        fullTranscript = '';
+        btn.classList.remove('btn-outline-primary');
+        btn.classList.add('btn-danger');
+        label.textContent = '<?= e(__('entry.stop_listening')) ?>';
+        status.classList.remove('d-none');
+        transcript.textContent = '';
+        recognition.start();
+    });
+
+    recognition.onresult = function(event) {
+        var interimText = '';
+        var finalText = '';
+        for (var i = event.resultIndex; i < event.results.length; i++) {
+            var t = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+                finalText += t + ' ';
+            } else {
+                interimText += t;
+            }
+        }
+
+        if (finalText) {
+            fullTranscript += finalText;
+            var filled = parseAndFill(finalText);
+            if (filled.length > 0) {
+                transcript.textContent = filled.join(', ');
+            }
+
+            if (checkSubmitCommand(finalText)) {
+                recognition.stop();
+                setTimeout(function() { form.submit(); }, 500);
+                return;
+            }
+        }
+
+        if (interimText) {
+            transcript.textContent = interimText;
+        }
+    };
+
+    recognition.onerror = function(event) {
+        console.error('[SmartEntry] Error:', event.error);
+        resetBtn();
+        if (event.error === 'not-allowed') {
+            transcript.textContent = '<?= e(__('entry.mic_denied')) ?>';
+            status.classList.remove('d-none');
+        }
+    };
+
+    recognition.onend = function() {
+        resetBtn();
+    };
+
+    function resetBtn() {
+        isListening = false;
+        btn.classList.remove('btn-danger');
+        btn.classList.add('btn-outline-primary');
+        label.textContent = '<?= e(__('entry.smart_entry')) ?>';
+        setTimeout(function() { status.classList.add('d-none'); }, 5000);
+    }
+})();
+</script>

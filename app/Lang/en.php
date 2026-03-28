@@ -89,6 +89,11 @@ return [
         'deleted' => 'Entry deleted.',
         'history_title' => 'Entry History',
         'no_entries' => 'No entries found.',
+        'smart_entry' => 'Smart Entry - Tap to Speak',
+        'listening' => 'Listening...',
+        'stop_listening' => 'Tap to Stop',
+        'voice_not_supported' => 'Voice not supported in this browser',
+        'mic_denied' => 'Microphone access denied. Please allow microphone access.',
     ],
 
     // Dashboard
