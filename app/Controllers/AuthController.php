@@ -160,6 +160,7 @@ class AuthController extends Controller
             Session::set('user_id', $user['id']);
             Session::set('auth_verified', true);
             Session::set('lang', $user['language']);
+            Session::set('unit_system', $user['unit_system'] ?? 'us');
             Session::regenerate();
 
             $decrypted = User::decryptUser($user);
@@ -169,6 +170,7 @@ class AuthController extends Controller
                 'last_name' => $decrypted['last_name'],
                 'email' => $decrypted['email'],
                 'language' => $user['language'],
+                'unit_system' => $user['unit_system'] ?? 'us',
                 'role' => $user['role'] ?? 'user',
                 'subscription_tier' => $user['subscription_tier'] ?? 'free',
             ]);
@@ -206,6 +208,7 @@ class AuthController extends Controller
 
         // Fully authenticated
         Session::set('auth_verified', true);
+        Session::set('unit_system', $rawUser['unit_system'] ?? 'us');
         Session::regenerate();
 
         $rawUser = User::find($userId);
@@ -216,6 +219,7 @@ class AuthController extends Controller
             'last_name' => $user['last_name'],
             'email' => $user['email'],
             'language' => $user['language'],
+            'unit_system' => $rawUser['unit_system'] ?? 'us',
             'role' => $rawUser['role'] ?? 'user',
             'subscription_tier' => $rawUser['subscription_tier'] ?? 'free',
         ]);
